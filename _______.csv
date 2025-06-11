@@ -1,0 +1,19 @@
+Word,IPA,English Explanation,中文解释
+variable,ˈveəriəbl,A container for storing data values,变量
+loop,luːp,A sequence of instructions that repeats until a condition is met,循环
+range,reɪndʒ,A function that returns a sequence of numbers,范围函数
+assign,əˈsaɪn,To give a value to a variable using '=',赋值
+DataFrame,ˈdeɪtə freɪm,A 2-dimensional table used in pandas to store data,数据框
+column,ˈkɒləm,A vertical set of values in a DataFrame,列
+row,rəʊ,A horizontal set of values in a DataFrame,行
+function,ˈfʌŋkʃən,A block of code that performs a specific task,函数
+random,ˈrændəm,Chosen without a specific pattern,随机的
+integer,ˈɪntɪdʒər,A whole number (no decimals),整数
+string,strɪŋ,"A sequence of characters, usually text",字符串
+f-string,ɛf strɪŋ,A formatted string literal used to insert variables into text,格式化字符串
+plot,plɒt,To draw a graph or chart,绘图
+axis,ˈæksɪs,A reference line on a chart (x or y),坐标轴
+table,ˈteɪbl,A structured arrangement of data in rows and columns,表格
+figure,ˈfɪɡə,The whole canvas or image for plotting,图像画布
+loop variable,luːp ˈveəriəbl,The variable used to track each step of a loop,循环变量
+comment,ˈkɒment,A note in code that is ignored by the computer,注释
