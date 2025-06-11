@@ -15,7 +15,6 @@ def analyze_emotion(text):
         return "Yay! I'm happy that you're feeling good today!"
     else:
         return "I'm here for you. Tell me more."
-
 if user_input:
     response = analyze_emotion(user_input)
     st.markdown(f"AI: {response}")
