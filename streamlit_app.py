@@ -1,6 +1,6 @@
 import streamlit as st
 st.set_page_config(page_title="EmotionBot", layout="centered")
-st.title("~HiHiHi~ I'm your friend CER1~)
+st.title("~HiHiHi~ I'm your friend CER1~")
 user_input = st.text_input("Say something to me:")
 def analyze_emotion(text):
     greetings = ["hi", "hello", "hey", "lol", "What's up", "How do you do"]
