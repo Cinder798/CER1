@@ -23,4 +23,4 @@ def analyze_emotion(text):
         return "I'm here for you. Tell me more."
 if user_input:
     response = analyze_emotion(user_input)
-    st.markdown(f"AI: {response}")
+    st.markdown(f"CER: {response}")
