@@ -17,7 +17,7 @@ def analyze_emotion(text):
         return "Ah~ I'm happy that you're feeling good today!"
     elif any(c in text for c in care_words):
         return "Would you like to talk about it, mate?"
-    elif any(y in text for y in suggest_words):
+    elif any(s in text for s in suggest_words):
         return "Aha, such a good plan! You must be an excellent P person! Have you heard of MBTI?"
     else:
         return "I'm here for you. Tell me more."
