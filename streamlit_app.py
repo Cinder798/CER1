@@ -42,4 +42,11 @@ def try_calculate(text):
         return None
 if user_input:
     response = analyze_emotion(user_input)
-    st.markdown(f"😼: {response}")
+    if response:
+        st.markdown(f"😼: {response}")
+    else:
+        calc_response = try_calculate(user_input)
+        if calc_response:
+            st.markdown(f"😼: {calc_response}")
+        else:
+            st.markdown("😿: I didn't quite get that... try again mew~")
