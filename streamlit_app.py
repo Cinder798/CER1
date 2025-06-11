@@ -33,4 +33,4 @@ def try_calculate(text):
         return None
 if user_input:
     response = analyze_emotion(user_input)
-    st.markdown(f"cc: {response}")
+    st.markdown(f"😼: {response}")
