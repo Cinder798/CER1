@@ -2,6 +2,40 @@ import streamlit as st
 st.set_page_config(page_title="EmotionBot", layout="centered")
 st.title("Mew~ I'm cc kitty 😼mew")
 user_input = st.text_input("Say something to me:")
+import streamlit as st
+st.set_page_config(page_title="cc kitty's Book of Answers", layout="centered")
+st.title("Mew~ 😼 Let's open the Book of Answers!")
+user_input = st.text_input("Say something to me:")
+book_of_answers = [
+    "🐾 Yes, but only after you nap properly.",
+    "😼 Hmm... Not now, maybe later under the full moon.",
+    "😹 Absolutely! But only if you're wearing fluffy socks."
+]
+if "mode" not in st.session_state:
+    st.session_state.mode = None
+# 主交互逻辑
+if user_input:
+    # 如果触发关键词（book / answer），切换到答案模式
+    if any(keyword in user_input.lower() for keyword in ["book", "answer"]):
+        st.session_state.mode = "book_of_answers"
+        st.markdown("🔮 cc kitty: Sooo mysterious! Choose a number between 1 and 3, mew~ 🎲")
+    
+    # 如果在答案模式中，等待用户输入数字
+    elif st.session_state.mode == "book_of_answers":
+        try:
+            num = int(user_input)
+            if 1 <= num <= 3:
+                st.markdown(f"✨ cc kitty whispers: {book_of_answers[num - 1]}")
+                st.session_state.mode = None  # 用完就退出答案模式
+            else:
+                st.markdown("😿: Mew~ That number's out of range! Choose 1, 2, or 3.")
+        except:
+            st.markdown("🙀: That's not a number, mew. Try again~")
+
+    # 否则走普通情绪回应逻辑
+    else:
+        st.markdown(f"😼: Mew~ I don't understand that yet. Try asking for the book of answers~")
+
 def analyze_emotion(text):
     greetings = ["hi", "hello", "hey", "lol", "What's up", "How do you do"]
     sad_words = ["sad", "tired", "unhappy", "cry", "not good", "upset"]
