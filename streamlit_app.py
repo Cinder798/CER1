@@ -21,15 +21,24 @@ def analyze_emotion(text):
         return "Aha, such a good plan! You must be an excellent P person! Have you heard of MBTI mew😹?"
     else:
         return None
+def convert_to_expression(text):
+    text = text.lower()
+    text = text.replace("plus", "+").replace("add", "+")
+    text = text.replace("minus", "-").replace("subtract", "-")
+    text = text.replace("times", "*").replace("multiplied by", "*")
+    text = text.replace("divided by", "/").replace("over", "/")
+    cleaned = re.sub(r"[^\d\+\-\*/\.()\s]", "", text)
+    return cleaned.strip()
 def try_calculate(text):
     try:
+        expression = convert_to_expression(text)
         allowed_chars = "0123456789+-*/.() "
-        if all(c in allowed_chars for c in text):
-            result = eval(text)
-            return f"Emmmm, the result is😾: {result}"
+        if expression and all(c in allowed_chars for c in expression):
+            result = eval(expression)
+            return f"Emmm... I did the math! The result is 😾: {result}"
         else:
             return None
-    except:
+    except Exception as e:
         return None
 if user_input:
     response = analyze_emotion(user_input)
