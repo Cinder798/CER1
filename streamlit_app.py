@@ -72,23 +72,22 @@ book_of_answers = {
         "🐾 On page 10, it says: 'Yes, and it will be purr-fect!' \nDo you want me to explain it? Just reply 'explain' or 'yes', CC will do it for you!"
     ],
     "zh": [
-        "🐾 第1页写着：“相信你的直觉，然后大胆行动！” 想让我解释一下吗？回复“解释”或“好”就行，喵~",
-        "🐾 第2页写着：“等到满月的时候。” 喵~ 意思是等待合适的时机比现在冒然行动要更有收获。",
-        "🐾 第3页写着：“问问你所爱的人。”",
-        "🐾 第4页写着：“也许吧……但要穿上你幸运的袜子！”",
-        "🐾 第5页写着：“现在不行，但很快就会行了。”",
-        "🐾 第6页写着：“只要你喵三声！”",
-        "🐾 第7页写着：“耐心会带来最棒的奖励。”",
-        "🐾 第8页写着：“当然啦——但要注意尾巴！”",
-        "🐾 第9页写着：“睡一觉再做决定。”",
-        "🐾 第10页写着：“会的喵~一切都会很完美！”"
+        "🐾 第1页写着：'相信你的直觉，然后大胆行动' \n想让CC酱解释一下吗？回复“解释”或“好”就行，喵~",
+        "🐾 第2页写着：'等到满月的时候。' \n想让CC酱解释一下吗？回复“解释”或“好”就行，喵~",
+        "🐾 第3页写着：'问问你所爱的人。' \n想让CC酱解释一下吗？回复“解释”或“好”就行，喵~",
+        "🐾 第4页写着：“也许吧……但要穿上你幸运的袜子！\n想让CC酱解释一下吗？回复“解释”或“好”就行，喵~",
+        "🐾 第5页写着：“现在不行，但很快就会行了。 \n想让CC酱解释一下吗？回复“解释”或“好”就行，喵~",
+        "🐾 第6页写着：“只要你喵三声！ \n想让CC酱解释一下吗？回复“解释”或“好”就行，喵~ ",
+        "🐾 第7页写着：“耐心会带来最棒的奖励。\n想让CC酱解释一下吗？回复“解释”或“好”就行，喵~",
+        "🐾 第8页写着：“当然啦——但要注意尾巴！\n想让CC酱解释一下吗？回复“解释”或“好”就行，喵~",
+        "🐾 第9页写着：“睡一觉再做决定。\n想让CC酱解释一下吗？回复“解释”或“好”就行，喵~",
+        "🐾 第10页写着：“会的喵~一切都会很完美！\n想让CC酱解释一下吗？回复“解释”或“好”就行，喵~"
     ]
 }
 explanations = {
     "en": [
-        "💡 page 1 means: now is the best time to act bravely, even if you're scared. A leap of faith, mew~
-The opportunity is right ahead of you!",
-        "💡 page 2 means: some things need time. Be patient, just like the moon grows slowly~",
+        "💡 page 1 means: now is the best time to act bravely, even if you're scared. A leap of faith, mew~ \nThe opportunity is right ahead of you!",
+        "💡 page 2 means: some things need time. \nBe patient, just like the moon grows slowly~",
         "💡 page 3 means: if unsure, talk to someone you trust with your heart 🫶",
         "💡 page 4 means: luck and coziness go together! Don't forget your socks~",
         "💡 page 5 means: not now, but the chance will come. Wait a bit more mew~",
