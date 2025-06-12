@@ -196,12 +196,3 @@ elif st.session_state.mode == "book_of_answers":
                 return None
         except Exception:
             return None
-response = analyze_emotion(user_input)
-if response:
-    st.markdown(f"😼: {response}")
-else:
-    calc_response = try_calculate(user_input)
-if calc_response:
-    st.markdown(f"😼: {calc_response}")
-else:
-    st.markdown("😿: I didn't quite get that... try again mew~")
