@@ -1,5 +1,63 @@
 import streamlit as st
 import re
+def contains_chinese(text):
+    return any('一' <= char <= '鿿' for char in text)
+def contains_english(text):
+    return any('a' <= char.lower() <= 'z' for char in text)
+def analyze_emotion(text):
+    greetings = ["hi", "hello", "hey", "lol", "what's up", "how do you do"]
+    sad_words = ["sad", "tired", "unhappy", "cry", "not good", "upset"]
+    happy_words = ["happy", "great", "excited", "good", "not bad", "emmm"]
+    care_words = ["care about", "feel better", "cure the pain"]
+    suggest_words = ["you'd better", "you should", "suggest you to"]
+    text = text.lower()
+    if any(g in text for g in greetings):
+        return "Hello there! How are you feeling today. Mew~😸"
+    elif any(s in text for s in sad_words):
+        return "I'm sorry to hear you're not feeling great. How can I help you mew?🙀"
+    elif any(h in text for h in happy_words):
+        return "Ah~ I'm happy that you're feeling good today mew!😽"
+    elif any(c in text for c in care_words):
+        return "Would you like to talk about it, mate?😻"
+    elif any(s in text for s in suggest_words):
+        return "Aha, such a good plan! You must be an excellent P person! Heard of MBTI, mew😹?"
+    else:
+        return None
+def convert_to_expression(text):
+    text = text.lower()
+    text = text.replace("plus", "+").replace("add", "+")
+    text = text.replace("minus", "-").replace("subtract", "-")
+    text = text.replace("times", "*").replace("multiplied by", "*")
+    text = text.replace("divided by", "/").replace("over", "/")
+    cleaned = re.sub(r"[^\d\+\-\*/\.\(\)\s]", "", text)
+    return cleaned.strip()
+
+def try_calculate(text):
+    try:
+        expression = convert_to_expression(text)
+        allowed_chars = "0123456789+-*/.() "
+        if expression and all(c in allowed_chars for c in expression):
+            result = eval(expression)
+            return f"Emmm... I did the math! The result is 😾: {result}"
+        else:
+            return None
+    except Exception:
+        return None
+def contains_chinese(text):
+    return any('一' <= char <= '鿿' for char in text)
+
+def contains_english(text):
+    return any('a' <= char.lower() <= 'z' for char in text)
+
+if "mode" not in st.session_state:
+    st.session_state.mode = None
+if "step" not in st.session_state:
+    st.session_state.step = 0
+if "last_answer_index" not in st.session_state:
+    st.session_state.last_answer_index = None
+book_of_answers = { ... }
+explanations = { ... }
+stories = { ... }
 st.set_page_config(page_title="cc kitty 😼 Emotional Book of Answers", layout="centered")
 st.title("Mew~ I'm cc kitty 😼")
 st.markdown("""
@@ -13,12 +71,27 @@ user_input = st.text_area(
     label="",
     height=150,
     placeholder="Type your thoughts here, mew~"
-st.write("📥 [Debug] User Input:", user_input)
 )
+st.write("📥 [Debug] User Input:", user_input)
+user_input_clean = user_input.lower().strip() if user_input else ""
+
+# ========== 4. 状态初始化 ==========
+
 def contains_chinese(text):
-    return any('\u4e00' <= char <= '\u9fff' for char in text)
+    return any('一' <= char <= '鿿' for char in text)
+
 def contains_english(text):
     return any('a' <= char.lower() <= 'z' for char in text)
+
+if "mode" not in st.session_state:
+    st.session_state.mode = None
+if "step" not in st.session_state:
+    st.session_state.step = 0
+if "last_answer_index" not in st.session_state:
+    st.session_state.last_answer_index = None
+book_of_answers = { ... }
+explanations = { ... }
+stories = { ... }
 if "mode" not in st.session_state:
     st.session_state.mode = None
 if "step" not in st.session_state:
@@ -105,8 +178,7 @@ stories = {
 }
 if user_input:
     lang = "zh" if contains_chinese(user_input) else "en"
-    user_input_clean = user_input.lower().strip()
-    st.write("👀 [Debug] Language Detected:", lang)
+    st.write("🈶 [Debug] Language Detected:", lang)
     st.write("🧹 [Debug] Cleaned Input:", user_input_clean)
     st.write("🔄 [Debug] Mode:", st.session_state.mode)
     st.write("🔢 [Debug] Step:", st.session_state.step)
@@ -117,97 +189,36 @@ if user_input:
             prompt = "请从 1 到 10 中选择一个数字喵~ 🎲" if lang == "zh" else "Choose a number between 1 and 10, mew~ 🎲"
             st.markdown(f"🔮 {prompt}")
         else:
-            if lang =="zh":
-                st.markdown("😺 好叭好叭，那下回吧喵～答案之书永远为你敞开哦💕")
-            else:
-                st.markdown("😺 That’s okay, mew~ maybe next time! The book is always here for you 💕")
-    else:
-        response = analyze_emotion(user_input_clean)
-        if response:
-            st.markdown(f"😼: {response}")
+            response = analyze_emotion(user_input_clean) or try_calculate(user_input_clean)
+            if response:
+                st.markdown(f"😼: {response}")
 elif st.session_state.mode == "book_of_answers":
+    lang = "zh" if contains_chinese(user_input_clean) else "en"
     if st.session_state.step == 0:
         try:
             num = int(user_input_clean)
             if 1 <= num <= 10:
                 st.session_state.last_answer_index = num - 1
                 st.session_state.step = 1
-                if lang == "zh":
-                    st.markdown(book_of_answers[lang][num - 1])
-                    st.markdown("🧐 需要本喵解释一下嘛？快回复 '解释' 或 '好'。")
-                else:
-                    st.markdown(book_of_answers[lang][num - 1])
-                    st.markdown("❓ Would you like an explanation mew? Say 'yes' or 'explain'~")
-            elif num > 10 or num < 1:
-                st.markdown("😿 这数儿不对呀，只能是1-10的数字哈亲～" if lang == "zh" else ("😿 Number out of range! Try 1-10 mew~"))
-        except Exception as e:
-            st.markdown("🙀 That’s not a number, mew~")
+                st.markdown(book_of_answers[lang][num - 1])
+                st.markdown("🧐 需要本喵解释一下嘛？快回复 '解释' 或 '好'。" if lang == "zh" else "❓ Would you like an explanation mew? Say 'yes' or 'explain'~")
+            else:
+                st.markdown("😿 数字要在 1-10 哦~" if lang == "zh" else "😿 Number out of range! Try 1-10 mew~")
+        except:
+            st.markdown("🙀 That's not a number, mew~")
     elif st.session_state.step == 1:
-        if user_input_clean in ["yes", "share", "share the story", "share it", "讲故事", "我想听", "行"]:
-            if lang == "zh":
-                st.markdown(f"🧶 CC故事时间: {stories[idx]}")
-                st.markddown("🌸 酱紫就是CC的故事啦喵～你想分享你的故事嘛亲亲~")
-                st.markdown("💌 如果你想，把你想说的话打字在这里叭喵～")
-            else:
-                idx = st.session_state.last_answer_index 
-                st.markdown(f"🧶 Kitty Storytime: {stories[lang][idx]}")
-                st.markddown("🌸 That’s my story... mew~ now I’m curious — would you like to share your story too?")
-                st.markdown("💌 If yes, just type anything you'd like to share~")
+        if user_input_clean in ["yes", "explain", "讲故事", "我想听", "行"]:
+            idx = st.session_state.last_answer_index
+            st.markdown(f"🧶 {'CC故事时间' if lang == 'zh' else 'Kitty Storytime'}: {stories[lang][idx]}")
+            st.markdown("🌸 酱紫就是CC的故事啦喵～你想分享你的故事嘛亲亲~" if lang == "zh" else "🌸 That’s my story... mew~ now I’m curious — would you like to share your story too?")
+            st.markdown("💌 如果你想，把你想说的话打字在这里叭喵～" if lang == "zh" else "💌 If yes, just type anything you'd like to share~")
+            st.session_state.step = 2
         else:
-            if lang =="zh":
-                st.markdown("😺 好叭好叭，那下回吧喵～答案之书永远为你敞开哦💕")
-            else:
-                st.markdown("😺 That’s okay, mew~ maybe next time! The book is always here for you 💕")
+            st.session_state.mode = None
+            st.session_state.step = 0
     elif st.session_state.step == 2:
         if user_input_clean:
-            if lang == "zh":
-                st.markdown(f"😻 天哪，原来你还有这样的故事！谢谢你，人！")
-            else:
-                st.markdown(f"😻 Wow, that sounds meaningful! Thanks for sharing with cc kitty~")
-                st.markdown("✨ Want to ask the Book of Answers again? Just say 'book' or 'answer' anytime mew~")
-        else:
-            if lang =="zh":
-                st.markdown("😺 好叭好叭，那下回吧喵～答案之书永远为你敞开哦💕")
-            else:
-                st.markdown("😺 That’s okay, mew~ maybe next time! The book is always here for you 💕")
+            st.markdown("😻 天哪，原来你还有这样的故事！谢谢你，人！" if lang == "zh" else "😻 Wow, that sounds meaningful! Thanks for sharing with cc kitty~")
+        st.markdown("✨ 想再问一次答案之书？再打 '答案之书' 就好啦~" if lang == "zh" else "✨ Want to ask the Book of Answers again? Just say 'book' or 'answer' anytime mew~")
         st.session_state.mode = None
         st.session_state.step = 0
-    else:
-        def analyze_emotion(text):
-            greetings = ["hi", "hello", "hey", "lol", "what's up", "how do you do"]
-            sad_words = ["sad", "tired", "unhappy", "cry", "not good", "upset"]
-            happy_words = ["happy", "great", "excited", "good", "not bad", "emmm"]
-            care_words = ["care about", "feel better", "cure the pain"]
-            suggest_words = ["you'd better", "you should", "suggest you to"]
-            text = text.lower()
-            if any(g in text for g in greetings):
-                return "Hello there! How are you feeling today. Mew~😸"
-            elif any(s in text for s in sad_words):
-                return "I'm sorry to hear you're not feeling great. How can I help you mew?🙀"
-            elif any(h in text for h in happy_words):
-                return "Ah~ I'm happy that you're feeling good today mew!😽"
-            elif any(c in text for c in care_words):
-                return "Would you like to talk about it, mate?😻"
-            elif any(s in text for s in suggest_words):
-                return "Aha, such a good plan! You must be an excellent P person! Heard of MBTI, mew😹?"
-            else:
-                return None
-    def convert_to_expression(text):
-        text = text.lower()
-        text = text.replace("plus", "+").replace("add", "+")
-        text = text.replace("minus", "-").replace("subtract", "-")
-        text = text.replace("times", "*").replace("multiplied by", "*")
-        text = text.replace("divided by", "/").replace("over", "/")
-        cleaned = re.sub(r"[^\d\+\-\*/\.\(\)\s]", "", text)
-        return cleaned.strip()
-    def try_calculate(text):
-        try:
-            expression = convert_to_expression(text)
-            allowed_chars = "0123456789+-*/.() "
-            if expression and all(c in allowed_chars for c in expression):
-                result = eval(expression)
-                return f"Emmm... I did the math! The result is 😾: {result}"
-            else:
-                return None
-        except Exception:
-            return None
