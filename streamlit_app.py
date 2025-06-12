@@ -1,31 +1,37 @@
 import streamlit as st
 import re
-st.set_page_config(page_title="cc kitty's Emotional Toolkit", layout="centered")
+st.set_page_config(page_title="cc kitty 😼 Emotional Book of Answers", layout="centered")
 st.title("Mew~ I'm cc kitty 😼 mew")
 user_input = st.text_input("Say something to me:")
 book_of_answers = [
-    "🐾 Yes, but only after you nap properly.",
-    "😼 Hmm... Not now, maybe later under the full moon.",
-    "😹 Absolutely! But only if you're wearing fluffy socks."
+    "🐾 1. Trust your instincts and leap forward.",
+    "😼 2. Wait until the moon is full.",
+    "😹 3. Ask someone you love.",
+    "😽 4. Maybe… but wear your lucky socks!",
+    "🙀 5. Not now, but soon enough.",
+    "😻 6. Only if you meow three times!",
+    "😼 7. Patience brings the best treats.",
+    "😹 8. Definitely — but watch your tail.",
+    "🐾 9. Sleep on it, then decide.",
+    "✨ 10. Yes, and it will be purr-fect!"
 ]
 if "mode" not in st.session_state:
     st.session_state.mode = None
 if user_input:
     if any(keyword in user_input.lower() for keyword in ["book", "answer"]):
         st.session_state.mode = "book_of_answers"
-        st.markdown("🔮 cc kitty: Sooo mysterious! Choose a number between 1 and 3, mew~ 🎲")
+        st.markdown("🔮 cc kitty: Listen~ the Book of Answers is opening mew.Choose a number between 1 and 10 🎲")
     elif st.session_state.mode == "book_of_answers":
         try:
             num = int(user_input)
-            if 1 <= num <= 3:
+            if 1 <= num <= 10:
                 st.markdown(f"✨ cc kitty whispers: {book_of_answers[num - 1]}")
                 st.session_state.mode = None
             else:
-                st.markdown("😿: Mew~ That number's out of range! Choose 1, 2, or 3.")
+                st.markdown("😿: The number your provided doesn't fit. So sorry mew. Do it again, choose between 1-10 mew.")
         except:
-            st.markdown("🚀: That's not a number, mew. Try again~")
+            st.markdown("🙀: That's not a number, mew. Try again~")
     else:
-        # Emotion or calculator response
         def analyze_emotion(text):
             greetings = ["hi", "hello", "hey", "lol", "what's up", "how do you do"]
             sad_words = ["sad", "tired", "unhappy", "cry", "not good", "upset"]
@@ -62,7 +68,7 @@ if user_input:
                     return f"Emmm... I did the math! The result is 😾: {result}"
                 else:
                     return None
-            except Exception as e:
+            except Exception:
                 return None
         response = analyze_emotion(user_input)
         if response:
