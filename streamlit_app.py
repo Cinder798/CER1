@@ -1,13 +1,18 @@
 import streamlit as st
 import re
+
 SHOW_DEBUG = False
+
 def debug(*args, **kwargs):
     if SHOW_DEBUG:
         st.write(*args, **kwargs)
+
 def contains_chinese(text):
     return any('\u4e00' <= char <= '\u9fff' for char in text)
+
 def contains_english(text):
     return any('a' <= char.lower() <= 'z' for char in text)
+
 def analyze_emotion(text):
     greetings = ["hi", "hello", "hey", "lol", "what's up", "how do you do"]
     sad_words = ["sad", "tired", "unhappy", "cry", "not good", "upset"]
@@ -27,6 +32,7 @@ def analyze_emotion(text):
         return "Aha, such a good plan! You must be an excellent P person! Heard of MBTI, mew😹?"
     else:
         return None
+
 def convert_to_expression(text):
     text = text.lower()
     text = text.replace("plus", "+").replace("add", "+")
@@ -35,6 +41,7 @@ def convert_to_expression(text):
     text = text.replace("divided by", "/").replace("over", "/")
     cleaned = re.sub(r"[^\d\+\-\*/\.\(\)\s]", "", text)
     return cleaned.strip()
+
 def try_calculate(text):
     try:
         expression = convert_to_expression(text)
@@ -46,28 +53,28 @@ def try_calculate(text):
             return None
     except Exception:
         return None
+
 st.set_page_config(page_title="cc kitty 😼 Emotional Book of Answers", layout="centered")
+st.title("Mew~ I'm CC Kitty😼Mew~")
 st.markdown("""
 <div style='font-size: 18px'>
-<b>Hey human~</b><br>
+Hey human~<br>
 CC knows you've been carrying so much, and you're doing so amazing!<br>
 No worries! CC kitty is always here for you — no judgment, no pressure.<br>
-Just cozy paws, gentle purrs, and open ears instead.<br>
-<b>Ready to share something? Just type it here, mew~</b> 🐱
+<b>Just cozy paws, gentle purrs, and open ears instead.<br>
+Ready to share something? Just type it here, mew~</b> 🐱
 </div>
 """, unsafe_allow_html=True)
+
 user_input = st.text_area(label="", height=150, placeholder="Type your thoughts here, mew~")
 user_input_clean = user_input.lower().strip() if user_input else ""
-if "mode" not in st.session_state:
-    st.session_state.mode = None
-if "step" not in st.session_state:
-    st.session_state.step = 0
-if "last_answer_index" not in st.session_state:
-    st.session_state.last_answer_index = None
+
 book_of_answers = {
     "en": [
-        "🐾 On page 1, it says: 'Trust your instincts and leap forward.'\nDo you want me to explain it? Just reply 'explain' or 'yes', CC will do it for you!",
-        "🐾 On page 2, it says: 'Wait until the moon is full.'\nThat means if you wait patiently for the right time—not pouncing too soon—you might just be rewarded, mew~",
+        "🐾 On page 1, it says: 'Trust your instincts and leap forward.'
+Do you want me to explain it? Just reply 'explain' or 'yes', CC will do it for you!",
+        "🐾 On page 2, it says: 'Wait until the moon is full.'
+That means if you wait patiently for the right time—not pouncing too soon—you might just be rewarded, mew~",
         "🐾 On page 3, it says: 'Ask someone you love.'",
         "🐾 On page 4, it says: 'Maybe… but wear your lucky socks!'",
         "🐾 On page 5, it says: 'Not now, but soon enough.'",
@@ -90,9 +97,11 @@ book_of_answers = {
         "🐾 第10页写着：“会的喵~一切都会很完美！”"
     ]
 }
+
 explanations = {
     "en": [
-        "💡 page 1 means: now is the best time to act bravely, even if you're scared. A leap of faith, mew~\nThe opportunity is right ahead of you!",
+        "💡 page 1 means: now is the best time to act bravely, even if you're scared. A leap of faith, mew~
+The opportunity is right ahead of you!",
         "💡 page 2 means: some things need time. Be patient, just like the moon grows slowly~",
         "💡 page 3 means: if unsure, talk to someone you trust with your heart 🫶",
         "💡 page 4 means: luck and coziness go together! Don't forget your socks~",
@@ -116,6 +125,7 @@ explanations = {
         "这意思是：放心吧，一切都会顺利的，喵式信仰开启！"
     ]
 }
+
 stories = {
     "en": [
         "One time, I jumped from a windowsill chasing a firefly... and found a fishball! Brave leap, yummy reward, mew~",
@@ -142,52 +152,56 @@ stories = {
         "我追着阳光跑，跑到了一处最暖的窗边，太舒服了喵~"
     ]
 }
-if user_input:
-    lang = "zh" if contains_chinese(user_input) else "en"
-    debug("📥 [Debug] User Input:", user_input)
-    debug("🈶 [Debug] Language Detected:", lang)
-    debug("🧹 [Debug] Cleaned Input:", user_input_clean)
-    debug("🔄 [Debug] Mode:", st.session_state.mode)
-    debug("🔢 [Debug] Step:", st.session_state.step)
-    if st.session_state.mode == "book_of_answers":
-        if user_input_clean in ["退出", "exit"]:
-            st.session_state.mode = None
-            st.session_state.step = 0
-            st.markdown("🙀 已退出答案之书模式~ 想再回来随时输入“答案之书”喵~")
-        elif st.session_state.step == 0:
-            try:
-                num = int(user_input_clean)
-                if 1 <= num <= 10:
-                    st.session_state.last_answer_index = num - 1
-                    st.session_state.step = 1
-                    st.markdown(f"<div style='font-size: 18px; font-weight: bold'>{book_of_answers[lang][num - 1]}</div>", unsafe_allow_html=True)
-                    st.markdown("🧐 需要本喵解释一下嘛？快回复 '解释' 或 '好'。你也可以输入 '退出' 离开噢~" if lang == "zh" else "❓ Would you like an explanation mew? Say 'yes' or 'explain'~ You can also say 'exit' to leave~")
-                else:
-                    st.markdown("😿 数字要在 1-10 哦~" if lang == "zh" else "😿 Number out of range! Try 1-10 mew~")
-            except:
-                st.markdown("🙀 That's not a number, mew~")
-        elif st.session_state.step == 1:
-            if user_input_clean in ["yes", "explain", "讲故事", "我想听", "行"]:
-                idx = st.session_state.last_answer_index
-                st.markdown(f"<div style='font-size: 24px; font-weight: bold'>🧶 {'CC故事时间' if lang == 'zh' else 'Kitty Storytime'}: {stories[lang][idx]}</div>", unsafe_allow_html=True)
-                st.markdown("🌸 酱紫就是CC的故事啦喵～你想分享你的故事嘛亲亲~" if lang == "zh" else "🌸 That’s my story... mew~ now I’m curious — would you like to share your story too?")
-                st.markdown("💌 如果你想，把你想说的话打字在这里叭喵～" if lang == "zh" else "💌 If yes, just type anything you'd like to share~")
-                st.session_state.step = 2
+
+if "mode" not in st.session_state:
+    st.session_state.mode = None
+if "step" not in st.session_state:
+    st.session_state.step = 0
+if "last_answer_index" not in st.session_state:
+    st.session_state.last_answer_index = None
+
+book_keywords = ["book", "answer", "book of answers", "答案之书"]
+
+lang = "zh" if contains_chinese(user_input_clean) else "en"
+
+response = analyze_emotion(user_input_clean) or try_calculate(user_input_clean)
+
+if any(keyword in user_input_clean for keyword in book_keywords):
+    st.session_state.mode = "book_of_answers"
+    st.session_state.step = 0
+    st.markdown("🔮 " + ("请从 1 到 10 中选择一个数字喵~ 🎲（你也可以输入 '退出' 离开~）" if lang == "zh" else "Choose a number between 1 and 10, mew~ 🎲 (You can type 'exit' anytime to leave)"))
+elif st.session_state.mode == "book_of_answers":
+    if user_input_clean in ["退出", "exit"]:
+        st.session_state.mode = None
+        st.session_state.step = 0
+        st.markdown("🙀 已退出答案之书模式~ 想再回来随时输入“答案之书”喵~" if lang == "zh" else "🙀 Book of Answers mode exited~ Just type again to come back, mew~")
+    elif st.session_state.step == 0:
+        try:
+            num = int(user_input_clean)
+            if 1 <= num <= 10:
+                st.session_state.last_answer_index = num - 1
+                st.session_state.step = 1
+                st.markdown(f"<div style='font-size: 18px; font-weight: bold'>{book_of_answers[lang][num - 1]}</div>", unsafe_allow_html=True)
+                st.markdown("🧐 需要本喵解释一下嘛？快回复 '解释' 或 '好'。你也可以输入 '退出' 离开噢~" if lang == "zh" else "❓ Would you like an explanation mew? Say 'yes' or 'explain'~ You can also say 'exit' to leave~")
             else:
-                st.session_state.mode = None
-                st.session_state.step = 0
-        elif st.session_state.step == 2:
-            if user_input_clean:
-                st.markdown("😻 天哪，原来你还有这样的故事！谢谢你，人！" if lang == "zh" else "😻 Wow, that sounds meaningful! Thanks for sharing with cc kitty~")
-            st.markdown("✨ 想再问一次答案之书？再打 '答案之书' 就好啦~" if lang == "zh" else "✨ Want to ask the Book of Answers again? Just say 'book' or 'answer' anytime mew~")
+                st.markdown("😿 数字要在 1-10 哦~" if lang == "zh" else "😿 Number out of range! Try 1-10 mew~")
+        except:
+            st.markdown("🙀 这不是个有效的数字喵~" if lang == "zh" else "🙀 That's not a valid number, mew~")
+    elif st.session_state.step == 1:
+        if user_input_clean in ["yes", "explain", "讲故事", "我想听", "行"]:
+            idx = st.session_state.last_answer_index
+            st.markdown(f"<div style='font-size: 24px; font-weight: bold'>🧶 {'CC故事时间' if lang == 'zh' else 'Kitty Storytime'}: {stories[lang][idx]}</div>", unsafe_allow_html=True)
+            st.markdown("🌸 酱紫就是CC的故事啦喵～你想分享你的故事嘛亲亲~" if lang == "zh" else "🌸 That’s my story... mew~ now I’m curious — would you like to share your story too?")
+            st.markdown("💌 如果你想，把你想说的话打字在这里叭喵～" if lang == "zh" else "💌 If yes, just type anything you'd like to share~")
+            st.session_state.step = 2
+        else:
             st.session_state.mode = None
             st.session_state.step = 0
-    else:
-        response = analyze_emotion(user_input_clean) or try_calculate(user_input_clean)
-        if response:
-            st.markdown(f"<div style='font-size: 18px; font-weight: bold'>😼: {response}</div>", unsafe_allow_html=True)
-        elif any(keyword in user_input_clean for keyword in ["book", "answer", "book of answers", "答案之书"]):
-            st.session_state.mode = "book_of_answers"
-            st.session_state.step = 0
-            prompt = "请从 1 到 10 中选择一个数字喵~ 🎲\n（你也可以输入 '退出' 离开~）" if lang == "zh" else "Choose a number between 1 and 10, mew~ 🎲\n(You can type 'exit' anytime to leave)"
-            st.markdown(f"🔮 {prompt}")
+    elif st.session_state.step == 2:
+        if user_input_clean:
+            st.markdown("😻 天哪，原来你还有这样的故事！谢谢你，人！" if lang == "zh" else "😻 Wow, that sounds meaningful! Thanks for sharing with cc kitty~")
+        st.markdown("✨ 想再问一次答案之书？再打 '答案之书' 就好啦~" if lang == "zh" else "✨ Want to ask the Book of Answers again? Just say 'book' or 'answer' anytime mew~")
+        st.session_state.mode = None
+        st.session_state.step = 0
+elif response:
+    st.markdown(f"<div style='font-size: 18px; font-weight: bold'>😼: {response}</div>", unsafe_allow_html=True)
