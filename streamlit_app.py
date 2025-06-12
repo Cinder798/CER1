@@ -13,7 +13,7 @@ def analyze_emotion(text):
     sad_words = ["sad", "tired", "unhappy", "cry", "not good", "upset"]
     happy_words = ["happy", "great", "excited", "good", "not bad", "emmm"]
     care_words = ["care about", "feel better", "cure the pain"]
-    suggest_words = ["you'd better", "you should", "suggest you to"]
+    suggest_words = ["you'd better", "you should", "suggest"]
     text = text.lower()
     if any(g in text for g in greetings):
         return "Hello there! How are you feeling today. Mew~😸"
