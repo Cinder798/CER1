@@ -172,9 +172,9 @@ elif st.session_state.mode == "book_of_answers":
             if lang == "en":
                 st.markdown(f"📖 Explanation: {explanations[idx]}")
                 st.markdown("💭 Want me to share a little cat story about this? Say 'yes' or 'share'~")
-            else
-            st.markdown(f"📖 Explanation: {explanations[idx]}")
-            st.markdown("💭 Want me to share a little cat story about this? Say 'yes' or 'share'~")
+            else:
+                st.markdown(f"📖 Explanation: {explanations[idx]}")
+                st.markdown("💭 Want me to share a little cat story about this? Say 'yes' or 'share'~")
             st.session_state.step = 2
         else:
             st.markdown("🙀 Say 'yes' if you'd like an explanation~")
@@ -182,6 +182,18 @@ elif st.session_state.mode == "book_of_answers":
     elif st.session_state.step == 2:
         if user_input_clean in ["yes", "share"]:
             idx = st.session_state.last_answer_index
+            if lang =="zh":
+                st.markdown
+                st.markddown
+                st.markdown
+            if lang == "en":
+                st.markdown
+                st.markddown
+                st.markdown
+            else:
+                st.markdown
+                st.markddown
+                st.markdown
             st.markdown(f"🧶 Kitty Storytime: {stories[idx]}")
             st.markdown("🌸 That’s my story... mew~ now I’m curious — would you like to share your story too?")
             st.markdown("💌 If yes, just type anything you'd like to share~")
