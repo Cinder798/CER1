@@ -4,16 +4,18 @@ st.set_page_config(page_title="cc kitty 😼 Emotional Book of Answers", layout=
 st.title("Mew~ I'm cc kitty 😼 mew")
 user_input = st.text_input("Say something to me:")
 book_of_answers = [
-    "🐾 1. f'("Trust your instincts and leap forward.")",
-    "😼 2. Wait until the moon is full.",
-    "😹 3. Ask someone you love.",
-    "😽 4. Maybe… but wear your lucky socks!",
-    "🙀 5. Not now, but soon enough.",
-    "😻 6. Only if you meow three times!",
-    "😼 7. Patience brings the best treats.",
-    "😹 8. Definitely — but watch your tail.",
+    "🐾 On page 1, it says:'Trust your instincts and leap forward.' 
+        That means,the oppoturnity is right ahead you! What are you waiting for? "
+    "🐾 On page 2, it says: 'Wait until the moon is full.' 
+        That means if you wait patiently for the right time, not pouncing too soon, you might just be rewarded, mew~",
+    "🐾 3. Ask someone you love.",
+    "🐾 4. Maybe… but wear your lucky socks!",
+    "🐾 5. Not now, but soon enough.",
+    "🐾 6. Only if you meow three times!",
+    "🐾 7. Patience brings the best treats.",
+    "🐾 8. Definitely — but watch your tail.",
     "🐾 9. Sleep on it, then decide.",
-    "✨ 10. Yes, and it will be purr-fect!"
+    "🐾 10. Yes, and it will be purr-fect!"
 ]
 if "mode" not in st.session_state:
     st.session_state.mode = None
