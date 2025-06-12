@@ -94,7 +94,7 @@ stories_zh = [
     "我梦到了解题方法，醒来立刻写下来，果然对了！梦里有答案喵~",
     "我追着阳光跑，跑到了一处最暖的窗边，太舒服了喵~"
 ]
-    if any(keyword in user_input_clean for keyword in ["book", "answer", "book of answers", "答案之书"]):
+if any(keyword in user_input_clean for keyword in ["book", "answer", "book of answers", "答案之书"]):
         st.session_state.mode = "book_of_answers"
         st.session_state.step = 0
         st.markdown("🔮 cc kitty: The Book of Answers is opening... Choose a number between 1 and 10 🎲")
