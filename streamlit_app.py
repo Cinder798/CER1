@@ -31,7 +31,6 @@ def convert_to_expression(text):
     text = text.replace("divided by", "/").replace("over", "/")
     cleaned = re.sub(r"[^\d\+\-\*/\.\(\)\s]", "", text)
     return cleaned.strip()
-
 def try_calculate(text):
     try:
         expression = convert_to_expression(text)
@@ -43,21 +42,6 @@ def try_calculate(text):
             return None
     except Exception:
         return None
-def contains_chinese(text):
-    return any('一' <= char <= '鿿' for char in text)
-
-def contains_english(text):
-    return any('a' <= char.lower() <= 'z' for char in text)
-
-if "mode" not in st.session_state:
-    st.session_state.mode = None
-if "step" not in st.session_state:
-    st.session_state.step = 0
-if "last_answer_index" not in st.session_state:
-    st.session_state.last_answer_index = None
-book_of_answers = { ... }
-explanations = { ... }
-stories = { ... }
 st.set_page_config(page_title="cc kitty 😼 Emotional Book of Answers", layout="centered")
 st.title("Mew~ I'm cc kitty 😼")
 st.markdown("""
@@ -67,31 +51,6 @@ No worries! CC kitty is always here for you — no judgment, no pressure.
 Just cozy paws, gentle purrs, and open ears instead.  
 **Ready to share something? Just type it here, mew~** 😽
 """)
-user_input = st.text_area(
-    label="",
-    height=150,
-    placeholder="Type your thoughts here, mew~"
-)
-st.write("📥 [Debug] User Input:", user_input)
-user_input_clean = user_input.lower().strip() if user_input else ""
-
-# ========== 4. 状态初始化 ==========
-
-def contains_chinese(text):
-    return any('一' <= char <= '鿿' for char in text)
-
-def contains_english(text):
-    return any('a' <= char.lower() <= 'z' for char in text)
-
-if "mode" not in st.session_state:
-    st.session_state.mode = None
-if "step" not in st.session_state:
-    st.session_state.step = 0
-if "last_answer_index" not in st.session_state:
-    st.session_state.last_answer_index = None
-book_of_answers = { ... }
-explanations = { ... }
-stories = { ... }
 if "mode" not in st.session_state:
     st.session_state.mode = None
 if "step" not in st.session_state:
@@ -176,24 +135,29 @@ stories = {
         "我追着阳光跑，跑到了一处最暖的窗边，太舒服了喵~"
     ]
 }
+user_input = st.text_area(
+    label="",
+    height=150,
+    placeholder="Type your thoughts here, mew~"
+)
+st.write("📥 [Debug] User Input:", user_input)
+user_input_clean = user_input.lower().strip() if user_input else ""
 if user_input:
     lang = "zh" if contains_chinese(user_input) else "en"
     st.write("🈶 [Debug] Language Detected:", lang)
     st.write("🧹 [Debug] Cleaned Input:", user_input_clean)
     st.write("🔄 [Debug] Mode:", st.session_state.mode)
     st.write("🔢 [Debug] Step:", st.session_state.step)
-    if st.session_state.mode != "book_of_answers":
-        if any(keyword in user_input_clean for keyword in ["book", "answer", "book of answers", "答案之书"]):
+    if st.session_state.mode is None:
+        response = analyze_emotion(user_input_clean) or try_calculate(user_input_clean)
+        if response:
+            st.markdown(f"😼: {response}")
+        elif any(keyword in user_input_clean for keyword in ["book", "answer", "book of answers", "答案之书"]):
             st.session_state.mode = "book_of_answers"
             st.session_state.step = 0
             prompt = "请从 1 到 10 中选择一个数字喵~ 🎲" if lang == "zh" else "Choose a number between 1 and 10, mew~ 🎲"
             st.markdown(f"🔮 {prompt}")
-        else:
-            response = analyze_emotion(user_input_clean) or try_calculate(user_input_clean)
-            if response:
-                st.markdown(f"😼: {response}")
 elif st.session_state.mode == "book_of_answers":
-    lang = "zh" if contains_chinese(user_input_clean) else "en"
     if st.session_state.step == 0:
         try:
             num = int(user_input_clean)
