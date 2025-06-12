@@ -196,7 +196,7 @@ elif st.session_state.mode == "book_of_answers":
                 return None
         except Exception:
             return None
-    response = analyze_emotion(user_input)
+response = analyze_emotion(user_input)
 if response:
     st.markdown(f"😼: {response}")
 else:
