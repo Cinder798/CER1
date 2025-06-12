@@ -2,14 +2,17 @@ import streamlit as st
 import re
 st.set_page_config(page_title="cc kitty 😼 Emotional Book of Answers", layout="centered")
 st.title("Mew~ I'm cc kitty 😼 mew")
+st.markdown("""
+**Hey human~**  
+CC knows you've been carrying so much, and you're doing so amazing!  
+No worries! CC kitty is always here for you — no judgment, no pressure.  
+Just cozy paws, gentle purrs, and open ears instead.  
+**Ready to share something? Just type it here, mew~** 😽
+""")
 user_input = st.text_area(
-    label="Hey human~",
+    label="",
     height=150,
-    placeholder=(
-        "CC knows you've been carrying so much, and you're doing so amazing!\n"
-        "No worries! CC kitty is always here for you — no judgment, no pressure. Just cozy paws, gentle purrs, and open ears instead.\n"
-        "Ready to share something? Just type it here, mew~😽"
-    )
+    placeholder="Type your thoughts here, mew~"
 )
 book_of_answers = [
     "🐾 On page 1, it says: 'Trust your instincts and leap forward.'  \nThat means the opportunity is right ahead of you! What are you waiting for? Mew~",
