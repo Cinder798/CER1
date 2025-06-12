@@ -103,52 +103,34 @@ stories = {
     ]
 }
 if user_input:
+    lang = "zh" if contains_chinese(user_input) else "en"
     user_input_clean = user_input.lower().strip()
-    if any(keyword in user_input_clean for keyword in ["book", "answer", "book of answers", "答案之书"]):
-        st.session_state.mode = "book_of_answers"
-        st.session_state.step = 0
-    if contains_chinese(user_input_clean):
-        st.markdown("🔮 答案之书打开啦... 请从1到10选择一个数字，喵~")
-    if contains_english(user_input_clean):
-        st.markdown("🔮 cc kitty: The Book of Answers is opening... Choose a number between 1 and 10 🎲")
-    else:
-        st.markdown("🔮 cc kitty: The Book of Answers is opening... Choose a number between 1 and 10 🎲")
+    if st.session_state.mode != "book_of_answers":
+        if any(keyword in user_input_clean for keyword in ["book", "answer", "book of answers", "答案之书"]):
+            st.session_state.mode = "book_of_answers"
+            st.session_state.step = 0
+            prompt = "请从 1 到 10 中选择一个数字喵~ 🎲" if lang == "zh" else "Choose a number between 1 and 10, mew~ 🎲"
+            st.markdown(f"🔮 {prompt}")
 elif st.session_state.mode == "book_of_answers":
-    idx = st.session_state.last_answer_index
-    lang = "zh" if contains_chinese(user_input_clean) else "en"
-    try:
-        if st.session_state.step == 0:
-            num = int(user_input_clean)
-            if 1 <= num <= 10:
-            st.session_state.last_answer_index = num - 1
-            if lang == "zh":
-                st.markdown(book_of_answers_zh[num - 1])
-                st.markdown("🧐 需要解释吗？请回复 '解释' 或 '好'。")
-            if lang == "en":
-                st.markdown(f"✨ cc kitty whispers: {book_of_answers[num - 1]}")
-                st.markdown("❓ Would you like an explanation mew? Say 'yes' or 'explain'~")
-            else:
-                st.markdown(f"✨ cc kitty whispers: {book_of_answers[num - 1]}")
-                st.markdown("❓ Would you like an explanation mew? Say 'yes' or 'explain'~")
-            st.session_state.step = 1
+    if st.session_state.step == 0:
+            try:
+                num = int(user_input_clean)
+                if 1 <= num <= 10:
+                st.session_state.last_answer_index = num - 1
+                msg = answers[lang][num - 1]
+                st.markdown(f"✨ {msg}")
+                st.session_state.step = 1
+                follow_up = "🧐 需要解释吗？请回复 '解释' 或 '好'。" if lang == "zh" else ("❓ Would you like an explanation mew? Say 'yes' or 'explain'~")
         else:
-            st.markdown("😿 That number doesn't work, mew. Pick between 1 and 10.")
+            st.markdown("😿 这数儿不对呀，只能是1-10的数字哈亲～” if lang == "zh" else ("😿 Number out of range! Try 1-10 mew~"))
     elif st.session_state.step == 1:
         if user_input_clean in ["yes", "explain", "can", "fine", "go on", "continue", "行", “解释”, "好", "继续", "接着"]:
             idx = st.session_state.last_answer_index
-            if lang =="zh":
-                st.markdown(f"📖 说人话中: {explanations[idx]}")
-                st.markdown("💭 想听听CC的故事嘛？想听的话回复‘我想听’，‘讲故事’～)
-            if lang == "en":
-                st.markdown(f"📖 Explanation: {explanations[idx]}")
-                st.markdown("💭 Want me to share a little cat story about this? Say 'yes' or 'share'~")
-            else:
-                st.markdown(f"📖 Explanation: {explanations[idx]}")
-                st.markdown("💭 Want me to share a little cat story about this? Say 'yes' or 'share'~")
-            st.session_state.step = 2
+            st.markdown(f"📖 {explanations[lang][idx]}")
+            st.session_state.mode = None
+            st.session_state.step = 0
         else:
-            st.markdown("🙀 Say 'yes' if you'd like an explanation~")
-
+            st.markdown("🐱 如果你想听，敲个“行”～” if lang == "zh" else （“🐱 Say 'yes' if you'd like to hear~"))
     elif st.session_state.step == 2:
         if user_input_clean in ["yes", "share"]:
             if lang =="zh":
