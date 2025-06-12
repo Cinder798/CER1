@@ -16,8 +16,8 @@ placeholder="Type your thoughts here, mew~"
 )
 def contains_chinese(text):
     return any('\u4e00' <= char <= '\u9fff' for char in text)
-def contains_ENglish(text):
-    return any(''for char in text)
+def contains_english(text):
+    return any('a' <= char.lower() <= 'z' for char in text)
 if "mode" not in st.session_state:
     st.session_state.mode = None
 if "step" not in st.session_state:
