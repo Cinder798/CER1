@@ -2,7 +2,7 @@ import streamlit as st
 import re
 st.set_page_config(page_title="cc kitty 😼 Emotional Book of Answers", layout="centered")
 st.title("Mew~ I'm cc kitty 😼 mew")
-user_input = st.text_input("Hey human~  \nCC knows you've been carrying so much, and you're doing so amazing! \nCC kitty is always here for you — no judgment, no pressure. \nJust cozy paws, gentle purrs, and open ears. \nReady to share something? \nJust type it here, mew~:")
+user_input = st.text_input("Hey human~  \nCC knows you've been carrying so much, and you're doing so amazing! \nNo worries! CC kitty is always here for you — no judgment, no pressure. \nJust cozy paws, gentle purrs, and open ears. \nReady to share something? \nJust type it here, mew~:")
 book_of_answers = [
     "🐾 On page 1, it says: 'Trust your instincts and leap forward.'  \nThat means the opportunity is right ahead of you! What are you waiting for? Mew~",
     "🐾 On page 2, it says: 'Wait until the moon is full.'  \nThat means if you wait patiently for the right time—not pouncing too soon—you might just be rewarded, mew~",
