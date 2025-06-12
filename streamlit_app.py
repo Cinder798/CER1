@@ -1,28 +1,28 @@
-import streamlit as st
-import re
-st.set_page_config(page_title="cc kitty 😼 Emotional Book of Answers", layout="centered")
-st.title("Mew~ I'm cc kitty 😼 mew")
-st.markdown("""
-**Hey human~**  
-CC knows you've been carrying so much, and you're doing so amazing!  
-No worries! CC kitty is always here for you — no judgment, no pressure.  
-Just cozy paws, gentle purrs, and open ears instead.  
-**Ready to share something? Just type it here, mew~** 😽
-""")
-user_input = st.text_area(
+    import streamlit as st
+    import re
+    st.set_page_config(page_title="cc kitty 😼 Emotional Book of Answers", layout="centered")
+    st.title("Mew~ I'm cc kitty 😼 mew")
+    st.markdown("""
+    **Hey human~**  
+    CC knows you've been carrying so much, and you're doing so amazing!  
+    No worries! CC kitty is always here for you — no judgment, no pressure.  
+    Just cozy paws, gentle purrs, and open ears instead.  
+    **Ready to share something? Just type it here, mew~** 😽
+    """)
+    user_input = st.text_area(
     label="",
     height=150,
     placeholder="Type your thoughts here, mew~"
-)
-def contains_chinese(text):
+    )
+    def contains_chinese(text):
     return any('\u4e00' <= char <= '\u9fff' for char in text)
-if "mode" not in st.session_state:
+    if "mode" not in st.session_state:
     st.session_state.mode = None
-if "step" not in st.session_state:
+    if "step" not in st.session_state:
     st.session_state.step = 0
-if "last_answer_index" not in st.session_state:
+    if "last_answer_index" not in st.session_state:
     st.session_state.last_answer_index = None
-book_of_answers = [
+    book_of_answers = [
     "🐾 On page 1, it says: 'Trust your instincts and leap forward.'\nDo you want me to explain it? Just reply 'explain' or 'yes', CC will do it for you!",
     "🐾 On page 2, it says: 'Wait until the moon is full.'\nThat means if you wait patiently for the right time—not pouncing too soon—you might just be rewarded, mew~",
     "🐾 On page 3, it says: 'Ask someone you love.'",
@@ -33,8 +33,8 @@ book_of_answers = [
     "🐾 On page 8, it says: 'Definitely — but watch your tail.'",
     "🐾 On page 9, it says: 'Sleep on it, then decide.'",
     "🐾 On page 10, it says: 'Yes, and it will be purr-fect!'"
-]
-explanations = [
+    ]
+    explanations = [
     "It means: now is the best time to act bravely, even if you're scared. A leap of faith, mew~\nThe opportunity is right ahead of you!",
     "It means: some things need time. Be patient, just like the moon grows slowly~",
     "It means: if unsure, talk to someone you trust with your heart 🫶",
@@ -45,8 +45,8 @@ explanations = [
     "It means: yes, but be careful and aware of your surroundings!",
     "It means: let your dream guide you! A nap clears the mind mew~",
     "It means: it's all gonna work out—trust the process, kitty style!"
-]
-stories = [
+    ]
+    stories = [
     "One time, I jumped from a windowsill chasing a firefly... and found a fishball! Brave leap, yummy reward, mew~",
     "I once waited four nights by the window for the full moon… and then got tuna. Patience is tasty~",
     "I asked my cat bro where my toy went. He helped me find it under the sofa~ teamwork mew!",
@@ -57,8 +57,8 @@ stories = [
     "Ran too fast once and bumped the table! Now I watch my tail before leaping 😹",
     "I napped on a tough problem... and dreamed of the answer! Zzz~ mew~",
     "Followed a sparkle and ended up in the sunniest spot ever. Best nap spot mew~"
-]
-book_of_answers_zh = [
+    ]
+    book_of_answers_zh = [
     "🐾 第1页写着：“相信你的直觉，然后大胆行动！” 想让我解释一下吗？回复“解释”或“好”就行，喵~",
     "🐾 第2页写着：“等到满月的时候。” 喵~ 意思是等待合适的时机比现在冒然行动要更有收获。",
     "🐾 第3页写着：“问问你所爱的人。”",
@@ -69,8 +69,8 @@ book_of_answers_zh = [
     "🐾 第8页写着：“当然啦——但要注意尾巴！”",
     "🐾 第9页写着：“睡一觉再做决定。”",
     "🐾 第10页写着：“会的喵~一切都会很完美！”"
-]
-explanations_zh = [
+    ]
+    explanations_zh = [
     "这意思是：现在就是行动的最佳时机，哪怕你有点害怕，也要勇敢一跳，喵~",
     "这意思是：有些事情需要时间，像月亮慢慢变圆一样，慢慢来，才会有好结果~",
     "这意思是：如果你不确定，就找个你真心信任的人聊一聊吧~",
@@ -81,8 +81,8 @@ explanations_zh = [
     "这意思是：当然可以，但要留心周围的变化喵~",
     "这意思是：做梦有时候能带来灵感，喵睡一觉再说~",
     "这意思是：放心吧，一切都会顺利的，喵式信仰开启！"
-]
-stories_zh = [
+    ]
+    stories_zh = [
     "有次我从窗台跳下去追萤火虫，结果发现了一个鱼丸！喵呜~",
     "我曾经等了四天四夜看满月，然后吃到了金枪鱼罐头，等得值喵~",
     "我问我哥我的玩具去哪了，他帮我从沙发底下找出来了，好队友喵~",
@@ -93,12 +93,12 @@ stories_zh = [
     "我以前跑太快撞到桌角了，现在每次跳跃前都会注意尾巴喵~",
     "我梦到了解题方法，醒来立刻写下来，果然对了！梦里有答案喵~",
     "我追着阳光跑，跑到了一处最暖的窗边，太舒服了喵~"
-]
-if any(keyword in user_input_clean for keyword in ["book", "answer", "book of answers", "答案之书"]):
+    ]
+    if any(keyword in user_input_clean for keyword in ["book", "answer", "book of answers", "答案之书"]):
         st.session_state.mode = "book_of_answers"
         st.session_state.step = 0
         st.markdown("🔮 cc kitty: The Book of Answers is opening... Choose a number between 1 and 10 🎲")
-elif st.session_state.mode == "book_of_answers":
+    elif st.session_state.mode == "book_of_answers":
         if st.session_state.step == 0:
             try:
                 num = int(user_input_clean)
@@ -120,7 +120,7 @@ elif st.session_state.mode == "book_of_answers":
                 st.session_state.step = 2
             else:
                 st.markdown("🙀 Say 'yes' if you'd like an explanation~")
-
+    
         elif st.session_state.step == 2:
             if user_input_clean in ["yes", "share"]:
                 idx = st.session_state.last_answer_index
