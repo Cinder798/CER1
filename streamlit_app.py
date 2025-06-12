@@ -49,7 +49,7 @@ def try_calculate(text):
         return None
 st.set_page_config(page_title="cc kitty 😼 Emotional Book of Answers", layout="centered")
 st.title("Mew~ I'm CC Kitty😼Mew~")
-st.markdown("""
+st.markdown('''
 #### Hey human~  
 CC knows you've been carrying so much, and you're doing so amazing!  
 No worries! CC kitty is always here for you — no judgment, no pressure.  
