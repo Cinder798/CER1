@@ -62,7 +62,8 @@ book_of_answers = {
     "en": [
         "🐾 On page 1, it says: 'Trust your instincts and leap forward.' \nDo you want me to explain it? Just reply 'explain' or 'yes', CC will do it for you!",
         "🐾 On page 2, it says: 'Wait until the moon is full.' \nDo you want me to explain it? Just reply 'explain' or 'yes', CC will do it for you!",
-        "🐾 On page 3, it says: 'Ask someone you love.' /nDo you want me to explain it? Just reply 'explain' or 'yes', CC will do it for you!",
+        "🐾 On page 3, it says: 'Ask someone you love.' 
+Do you want me to explain it? Just reply 'explain' or 'yes', CC will do it for you!",
         "🐾 On page 4, it says: 'Maybe… but wear your lucky socks!' \nDo you want me to explain it? Just reply 'explain' or 'yes', CC will do it for you!",
         "🐾 On page 5, it says: 'Not now, but soon enough.' \nDo you want me to explain it? Just reply 'explain' or 'yes', CC will do it for you!",
         "🐾 On page 6, it says: 'Only if you meow three times!' \nDo you want me to explain it? Just reply 'explain' or 'yes', CC will do it for you!",
@@ -73,15 +74,15 @@ book_of_answers = {
     ],
     "zh": [
         "🐾 第1页写着：'相信你的直觉，然后大胆行动' \n想让CC酱解释一下吗？回复 '解释' 或 '好' 就行，喵~",
-        "🐾 第2页写着：'等到满月的时候。' \n想让CC酱解释一下吗？回复 '解释' 或 '好' 就行，喵~",
-        "🐾 第3页写着：'问问你所爱的人。' \n想让CC酱解释一下吗？回复 '解释' 或 '好' 就行，喵~",
-        "🐾 第4页写着：“也许吧……但要穿上你幸运的袜子！\n想让CC酱解释一下吗？回复 '解释' 或 '好' 就行，喵~",
-        "🐾 第5页写着：“现在不行，但很快就会行了。 \n想让CC酱解释一下吗？回复 '解释' 或 '好' 就行，喵~",
-        "🐾 第6页写着：“只要你喵三声！ \n想让CC酱解释一下吗？回复 '解释' 或 '好' 就行，喵~",
-        "🐾 第7页写着：“耐心会带来最棒的奖励。\n想让CC酱解释一下吗？回复 '解释' 或 '好' 就行，喵~",
-        "🐾 第8页写着：“当然啦——但要注意尾巴！\n想让CC酱解释一下吗？回复 '解释' 或 '好' 就行，喵~",
-        "🐾 第9页写着：“睡一觉再做决定。\n想让CC酱解释一下吗？回复 '解释' 或 '好' 就行，喵~",
-        "🐾 第10页写着：“会的喵~一切都会很完美！\n想让CC酱解释一下吗？回复 '解释' 或 '好' 就行，喵~"
+        "🐾 第2页写着：'等到满月的时候' \n想让CC酱解释一下吗？回复 '解释' 或 '好' 就行，喵~",
+        "🐾 第3页写着：'问问你所爱的人' \n想让CC酱解释一下吗？回复 '解释' 或 '好' 就行，喵~",
+        "🐾 第4页写着：'也许吧……但要穿上你幸运的袜子' \n想让CC酱解释一下吗？回复 '解释' 或 '好' 就行，喵~",
+        "🐾 第5页写着：'现在不行，但很快就会行了' \n想让CC酱解释一下吗？回复 '解释' 或 '好' 就行，喵~",
+        "🐾 第6页写着：'只要你喵三声!' \n想让CC酱解释一下吗？回复 '解释' 或 '好' 就行，喵~",
+        "🐾 第7页写着：'耐心会带来最棒的奖励.' \n想让CC酱解释一下吗？回复 '解释' 或 '好' 就行，喵~",
+        "🐾 第8页写着：'当然啦——但要注意尾巴!' \n想让CC酱解释一下吗？回复 '解释' 或 '好' 就行，喵~",
+        "🐾 第9页写着：'睡一觉再做决定.' \n想让CC酱解释一下吗？回复 '解释' 或 '好' 就行，喵~",
+        "🐾 第10页写着：'会的喵~一切都会很完美!' \n想让CC酱解释一下吗？回复 '解释' 或 '好' 就行，喵~"
     ]
 }
 explanations = {
@@ -107,7 +108,7 @@ explanations = {
         "这意思是：等一等，奖励马上就来了喵~",
         "这意思是：当然可以，但要留心周围的变化喵~",
         "这意思是：做梦有时候能带来灵感，喵睡一觉再说~",
-        "这意思是：放心吧，一切都会顺利的，喵式信仰开启！"
+        "这意思是：放心吧，一切都会顺利的，喵式信仰开启!"
     ]
 }
 stories = {
@@ -124,16 +125,16 @@ stories = {
         "Followed a sparkle and ended up in the sunniest spot ever. Best nap spot mew~"
     ],
     "zh": [
-        "有次我从窗台跳下去追萤火虫，结果发现了一个鱼丸！喵呜~",
-        "我曾经等了四天四夜看满月，然后吃到了金枪鱼罐头，等得值喵~",
-        "我问我哥我的玩具去哪了，他帮我从沙发底下找出来了，好队友喵~",
-        "我穿着彩虹袜子，在沙发底下发现了一块饼干，神奇吗？喵~",
-        "我本来想偷偷溜出去，但外面风好大，等到晴天就追上了蝴蝶~",
-        "我对着冰箱喵了三声……结果真的拿到小鱼干了！神奇吧喵~",
-        "我等了一整天，我的铲屎官回来时给了我一条软绵绵的小毯子~",
-        "我以前跑太快撞到桌角了，现在每次跳跃前都会注意尾巴喵~",
-        "我梦到了解题方法，醒来立刻写下来，果然对了！梦里有答案喵~",
-        "我追着阳光跑，跑到了一处最暖的窗边，太舒服了喵~"
+        "有次我从窗台跳下去追萤火虫, 结果发现了一个鱼丸!喵呜~",
+        "我曾经等了四天四夜看满月, 然后吃到了金枪鱼罐头, 等得值喵~",
+        "我问我哥我的玩具去哪了, 他帮我从沙发底下找出来了, 好队友喵~",
+        "我穿着彩虹袜子, 在沙发底下发现了一块饼干, 神奇吗? 喵~",
+        "我本来想偷偷溜出去, 但外面风好大, 等到晴天就追上了蝴蝶~",
+        "我对着冰箱喵了三声……结果真的拿到小鱼干了! 神奇吧喵~",
+        "我等了一整天, 我的铲屎官回来时给了我一条软绵绵的小毯子~",
+        "我以前跑太快撞到桌角了, 现在每次跳跃前都会注意尾巴喵~",
+        "我梦到了解题方法, 醒来立刻写下来, 果然对了! 梦里有答案喵~",
+        "我追着阳光跑, 跑到了一处最暖的窗边, 太舒服了喵~"
     ]
 }
 if "mode" not in st.session_state:
