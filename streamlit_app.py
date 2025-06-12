@@ -48,7 +48,7 @@ def try_calculate(text):
         return None
 st.set_page_config(page_title="cc kitty 😼 Emotional Book of Answers", layout="centered")
 st.markdown("""
-<div style='font-size: 28px'>
+<div style='font-size: 18px'>
 <b>Hey human~</b><br>
 CC knows you've been carrying so much, and you're doing so amazing!<br>
 No worries! CC kitty is always here for you — no judgment, no pressure.<br>
@@ -169,7 +169,7 @@ if user_input:
         elif st.session_state.step == 1:
             if user_input_clean in ["yes", "explain", "讲故事", "我想听", "行"]:
                 idx = st.session_state.last_answer_index
-                st.markdown(f"<div style='font-size: 18px; font-weight: bold'>🧶 {'CC故事时间' if lang == 'zh' else 'Kitty Storytime'}: {stories[lang][idx]}</div>", unsafe_allow_html=True)
+                st.markdown(f"<div style='font-size: 24px; font-weight: bold'>🧶 {'CC故事时间' if lang == 'zh' else 'Kitty Storytime'}: {stories[lang][idx]}</div>", unsafe_allow_html=True)
                 st.markdown("🌸 酱紫就是CC的故事啦喵～你想分享你的故事嘛亲亲~" if lang == "zh" else "🌸 That’s my story... mew~ now I’m curious — would you like to share your story too?")
                 st.markdown("💌 如果你想，把你想说的话打字在这里叭喵～" if lang == "zh" else "💌 If yes, just type anything you'd like to share~")
                 st.session_state.step = 2
