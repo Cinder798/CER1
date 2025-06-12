@@ -96,15 +96,53 @@ stories_zh = [
     "我梦到了解题方法，醒来立刻写下来，果然对了！梦里有答案喵~",
     "我追着阳光跑，跑到了一处最暖的窗边，太舒服了喵~"
 ]
+book_of_answers_en = [
+    "🐾 On page 1, it says: 'Trust your instincts and leap forward.'\nDo you want me to explain it? Just reply 'explain' or 'yes', CC will do it for you!",
+    "🐾 On page 2, it says: 'Wait until the moon is full.'\nThat means if you wait patiently for the right time—not pouncing too soon—you might just be rewarded, mew~",
+    "🐾 On page 3, it says: 'Ask someone you love.'",
+    "🐾 On page 4, it says: 'Maybe… but wear your lucky socks!'",
+    "🐾 On page 5, it says: 'Not now, but soon enough.'",
+    "🐾 On page 6, it says: 'Only if you meow three times!'",
+    "🐾 On page 7, it says: 'Patience brings the best treats.'",
+    "🐾 On page 8, it says: 'Definitely — but watch your tail.'",
+    "🐾 On page 9, it says: 'Sleep on it, then decide.'",
+    "🐾 On page 10, it says: 'Yes, and it will be purr-fect!'"
+]
+explanations_en = [
+    "It means: now is the best time to act bravely, even if you're scared. A leap of faith, mew~\nThe opportunity is right ahead of you!",
+    "It means: some things need time. Be patient, just like the moon grows slowly~",
+    "It means: if unsure, talk to someone you trust with your heart 🫶",
+    "It means: luck and coziness go together! Don't forget your socks~",
+    "It means: not now, but the chance will come. Wait a bit more mew~",
+    "It means: be playful! Magic needs a little silliness sometimes 😹",
+    "It means: rewards come to those who wait. Hold on, treat is near!",
+    "It means: yes, but be careful and aware of your surroundings!",
+    "It means: let your dream guide you! A nap clears the mind mew~",
+    "It means: it's all gonna work out—trust the process, kitty style!"
+]
+stories_en = [
+    "One time, I jumped from a windowsill chasing a firefly... and found a fishball! Brave leap, yummy reward, mew~",
+    "I once waited four nights by the window for the full moon… and then got tuna. Patience is tasty~",
+    "I asked my cat bro where my toy went. He helped me find it under the sofa~ teamwork mew!",
+    "I wore rainbow socks and found a cookie under the couch. Coincidence? 😼"
+    "I wanted to sneak out, but the wind was scary. Waited till sunshine—and caught a butterfly!",
+    "I meowed three times in front of the fridge... and got my treat! Magic, right?",
+    "Waited all day by the door, then my human came home with a blanket just for me~",
+    "Ran too fast once and bumped the table! Now I watch my tail before leaping 😹",
+    "I napped on a tough problem... and dreamed of the answer! Zzz~ mew~",
+    "Followed a sparkle and ended up in the sunniest spot ever. Best nap spot mew~"
+]
 if user_input:
     user_input_clean = user_input.lower().strip()
     if any(keyword in user_input_clean for keyword in ["book", "answer", "book of answers", "答案之书"]):
         st.session_state.mode = "book_of_answers"
         st.session_state.step = 0
     if contains_chinese(user_input_clean):
-            st.markdown("🔮 答案之书打开啦... 请从1到10选择一个数字，喵~")
-        else:
-            st.markdown("🔮 cc kitty: The Book of Answers is opening... Choose a number between 1 and 10 🎲")
+        st.markdown("🔮 答案之书打开啦... 请从1到10选择一个数字，喵~")
+    if contains_english(user_input_clean):
+        st.markdown("🔮 cc kitty: The Book of Answers is opening... Choose a number between 1 and 10 🎲")
+    else:
+        st.markdown("🔮 cc kitty: The Book of Answers is opening... Choose a number between 1 and 10 🎲")
 elif st.session_state.mode == "book_of_answers":
     idx = st.session_state.last_answer_index
     lang = "zh" if contains_chinese(user_input_clean) else "en"
@@ -116,6 +154,9 @@ elif st.session_state.mode == "book_of_answers":
             if lang == "zh":
                 st.markdown(book_of_answers_zh[num - 1])
                 st.markdown("🧐 需要解释吗？请回复 '解释' 或 '好'。")
+            if lang == "en":
+                st.markdown(f"✨ cc kitty whispers: {book_of_answers[num - 1]}")
+                st.markdown("❓ Would you like an explanation mew? Say 'yes' or 'explain'~")
             else:
                 st.markdown(f"✨ cc kitty whispers: {book_of_answers[num - 1]}")
                 st.markdown("❓ Would you like an explanation mew? Say 'yes' or 'explain'~")
@@ -128,7 +169,10 @@ elif st.session_state.mode == "book_of_answers":
             if lang =="zh":
                 st.markdown(f"📖 说人话中: {explanations[idx]}")
                 st.markdown("💭 想听听CC的故事嘛？想听的话回复‘我想听’，‘讲故事’～)
-            else 
+            if lang == "en":
+                st.markdown(f"📖 Explanation: {explanations[idx]}")
+                st.markdown("💭 Want me to share a little cat story about this? Say 'yes' or 'share'~")
+            else
             st.markdown(f"📖 Explanation: {explanations[idx]}")
             st.markdown("💭 Want me to share a little cat story about this? Say 'yes' or 'share'~")
             st.session_state.step = 2
