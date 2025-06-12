@@ -60,18 +60,16 @@ user_input = st.text_area(label="", height=150, placeholder="Type your thoughts 
 user_input_clean = user_input.lower().strip() if user_input else ""
 book_of_answers = {
     "en": [
-        "🐾 On page 1, it says: 'Trust your instincts and leap forward.'
-Do you want me to explain it? Just reply 'explain' or 'yes', CC will do it for you!",
-        "🐾 On page 2, it says: 'Wait until the moon is full.'
-That means if you wait patiently for the right time—not pouncing too soon—you might just be rewarded, mew~",
-        "🐾 On page 3, it says: 'Ask someone you love.'",
-        "🐾 On page 4, it says: 'Maybe… but wear your lucky socks!'",
-        "🐾 On page 5, it says: 'Not now, but soon enough.'",
-        "🐾 On page 6, it says: 'Only if you meow three times!'",
-        "🐾 On page 7, it says: 'Patience brings the best treats.'",
-        "🐾 On page 8, it says: 'Definitely — but watch your tail.'",
-        "🐾 On page 9, it says: 'Sleep on it, then decide.'",
-        "🐾 On page 10, it says: 'Yes, and it will be purr-fect!'"
+        "🐾 On page 1, it says: 'Trust your instincts and leap forward.' \nDo you want me to explain it? Just reply 'explain' or 'yes', CC will do it for you!",
+        "🐾 On page 2, it says: 'Wait until the moon is full.' \nDo you want me to explain it? Just reply 'explain' or 'yes', CC will do it for you!",
+        "🐾 On page 3, it says: 'Ask someone you love.' /nDo you want me to explain it? Just reply 'explain' or 'yes', CC will do it for you!",
+        "🐾 On page 4, it says: 'Maybe… but wear your lucky socks!' \nDo you want me to explain it? Just reply 'explain' or 'yes', CC will do it for you!",
+        "🐾 On page 5, it says: 'Not now, but soon enough.' \nDo you want me to explain it? Just reply 'explain' or 'yes', CC will do it for you!",
+        "🐾 On page 6, it says: 'Only if you meow three times!' \nDo you want me to explain it? Just reply 'explain' or 'yes', CC will do it for you!",
+        "🐾 On page 7, it says: 'Patience brings the best treats.' \nDo you want me to explain it? Just reply 'explain' or 'yes', CC will do it for you!",
+        "🐾 On page 8, it says: 'Definitely — but watch your tail.' \nDo you want me to explain it? Just reply 'explain' or 'yes', CC will do it for you!",
+        "🐾 On page 9, it says: 'Sleep on it, then decide.' \nDo you want me to explain it? Just reply 'explain' or 'yes', CC will do it for you!",
+        "🐾 On page 10, it says: 'Yes, and it will be purr-fect!' \nDo you want me to explain it? Just reply 'explain' or 'yes', CC will do it for you!"
     ],
     "zh": [
         "🐾 第1页写着：“相信你的直觉，然后大胆行动！” 想让我解释一下吗？回复“解释”或“好”就行，喵~",
