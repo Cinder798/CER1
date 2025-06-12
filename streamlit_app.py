@@ -1,7 +1,7 @@
 import streamlit as st
 import re
 st.set_page_config(page_title="cc kitty 😼 Emotional Book of Answers", layout="centered")
-st.title("Mew~ I'm cc kitty 😼 mew")
+st.title("Mew~ I'm cc kitty 😼")
 st.markdown("""
 **Hey human~**  
 CC knows you've been carrying so much, and you're doing so amazing!  
@@ -16,6 +16,8 @@ placeholder="Type your thoughts here, mew~"
 )
 def contains_chinese(text):
     return any('\u4e00' <= char <= '\u9fff' for char in text)
+def contains_ENglish(text):
+    return any(''for char in text)
 if "mode" not in st.session_state:
     st.session_state.mode = None
 if "step" not in st.session_state:
@@ -94,27 +96,39 @@ stories_zh = [
     "我梦到了解题方法，醒来立刻写下来，果然对了！梦里有答案喵~",
     "我追着阳光跑，跑到了一处最暖的窗边，太舒服了喵~"
 ]
-if any(keyword in user_input_clean for keyword in ["book", "answer", "book of answers", "答案之书"]):
-    st.session_state.mode = "book_of_answers"
-    st.session_state.step = 0
-    st.markdown("🔮 cc kitty: The Book of Answers is opening... Choose a number between 1 and 10 🎲")
+if user_input:
+    user_input_clean = user_input.lower().strip()
+    if any(keyword in user_input_clean for keyword in ["book", "answer", "book of answers", "答案之书"]):
+        st.session_state.mode = "book_of_answers"
+        st.session_state.step = 0
+    if contains_chinese(user_input_clean):
+            st.markdown("🔮 答案之书打开啦... 请从1到10选择一个数字，喵~")
+        else:
+            st.markdown("🔮 cc kitty: The Book of Answers is opening... Choose a number between 1 and 10 🎲")
 elif st.session_state.mode == "book_of_answers":
-    if st.session_state.step == 0:
-        try:
+    idx = st.session_state.last_answer_index
+    lang = "zh" if contains_chinese(user_input_clean) else "en"
+    try:
+        if st.session_state.step == 0:
             num = int(user_input_clean)
             if 1 <= num <= 10:
-                idx = num - 1
-                st.session_state.last_answer_index = idx
-                st.markdown(f"✨ cc kitty whispers: {book_of_answers[idx]}")
-                st.markdown("❓ Would you like an explanation mew? Say 'yes' or 'explain'~")
-                st.session_state.step = 1
+            st.session_state.last_answer_index = num - 1
+            if lang == "zh":
+                st.markdown(book_of_answers_zh[num - 1])
+                st.markdown("🧐 需要解释吗？请回复 '解释' 或 '好'。")
             else:
-                st.markdown("😿 That number doesn't work, mew. Pick between 1 and 10.")
-        except:
-            st.markdown("🙀 That's not a number, mew. Try again~")
+                st.markdown(f"✨ cc kitty whispers: {book_of_answers[num - 1]}")
+                st.markdown("❓ Would you like an explanation mew? Say 'yes' or 'explain'~")
+            st.session_state.step = 1
+        else:
+            st.markdown("😿 That number doesn't work, mew. Pick between 1 and 10.")
     elif st.session_state.step == 1:
-        if user_input_clean in ["yes", "explain"]:
+        if user_input_clean in ["yes", "explain", "can", "fine", "go on", "continue", "行", “解释”, "好", "继续", "接着"]:
             idx = st.session_state.last_answer_index
+            if lang =="zh":
+                st.markdown(f"📖 说人话中: {explanations[idx]}")
+                st.markdown("💭 想听听CC的故事嘛？想听的话回复‘我想听’，‘讲故事’～)
+            else 
             st.markdown(f"📖 Explanation: {explanations[idx]}")
             st.markdown("💭 Want me to share a little cat story about this? Say 'yes' or 'share'~")
             st.session_state.step = 2
