@@ -182,7 +182,7 @@ if response:
     st.markdown(f"😼: {response}")
 else:
     calc_response = try_calculate(user_input)
-        if calc_response:
-            st.markdown(f"😼: {calc_response}")
-        else:
-            st.markdown("😿: I didn't quite get that... try again mew~")
+if calc_response:
+    st.markdown(f"😼: {calc_response}")
+else:
+    st.markdown("😿: I didn't quite get that... try again mew~")
