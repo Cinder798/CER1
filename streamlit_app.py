@@ -98,7 +98,7 @@ if any(keyword in user_input_clean for keyword in ["book", "answer", "book of an
         st.session_state.mode = "book_of_answers"
         st.session_state.step = 0
         st.markdown("🔮 cc kitty: The Book of Answers is opening... Choose a number between 1 and 10 🎲")
-    elif st.session_state.mode == "book_of_answers":
+elif st.session_state.mode == "book_of_answers":
         if st.session_state.step == 0:
             try:
                 num = int(user_input_clean)
