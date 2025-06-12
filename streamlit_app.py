@@ -5,7 +5,8 @@ st.title("Mew~ I'm cc kitty 😼 mew")
 st.markdown("""
 **Hey human~**  
 CC knows you've been carrying so much, and you're doing so amazing!  
-No worries! CC kitty is always here for you — no judgment, no pressure. Just cozy paws, gentle purrs, and open ears instead.  
+No worries! CC kitty is always here for you — no judgment, no pressure. 
+Just cozy paws, gentle purrs, and open ears instead.  
 **Ready to share something? Just type it here, mew~** 😽
 """)
 user_input = st.text_area(
@@ -14,7 +15,7 @@ user_input = st.text_area(
     placeholder="Type your thoughts here, mew~"
 )
 book_of_answers = [
-    "🐾 On page 1, it says: 'Trust your instincts and leap forward.'  \nThat means the opportunity is right ahead of you! What are you waiting for? Mew~",
+    "🐾 On page 1, it says: 'Trust your instincts and leap forward.'  \nDo you wanna me to explain it? If you do, just reply 'explain' or 'yes', CC will do it for you!",
     "🐾 On page 2, it says: 'Wait until the moon is full.'  \nThat means if you wait patiently for the right time—not pouncing too soon—you might just be rewarded, mew~",
     "🐾 On page 3, it says: 'Ask someone you love.'",
     "🐾 On page 4, it says: 'Maybe… but wear your lucky socks!'",
@@ -27,7 +28,7 @@ book_of_answers = [
 ]
 
 explanations = [
-    "It means: now is the best time to act bravely, even if you're scared. A leap of faith, mew~",
+    "It means: now is the best time to act bravely, even if you're scared. A leap of faith, mew~ /nThe opportunity is right ahead of you! What are you waiting for? Mew~",
     "It means: some things need time. Be patient, just like the moon grows slowly~",
     "It means: if unsure, talk to someone you trust with your heart 🫶",
     "It means: luck and coziness go together! Don't forget your socks~",
