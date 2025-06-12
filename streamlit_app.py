@@ -156,8 +156,8 @@ elif st.session_state.mode == "book_of_answers":
                 return "Would you like to talk about it, mate?😻"
             elif any(s in text for s in suggest_words):
                 return "Aha, such a good plan! You must be an excellent P person! Heard of MBTI, mew😹?"
-        else:
-            return None
+            else:
+                return None
     def convert_to_expression(text):
         text = text.lower()
         text = text.replace("plus", "+").replace("add", "+")
