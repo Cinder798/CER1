@@ -1,11 +1,12 @@
 import streamlit as st
 import re
+
 st.set_page_config(page_title="cc kitty 😼 Emotional Book of Answers", layout="centered")
 st.title("Mew~ I'm cc kitty 😼 mew")
 st.markdown("""
 **Hey human~**  
 CC knows you've been carrying so much, and you're doing so amazing!  
-No worries! CC kitty is always here for you — no judgment, no pressure. 
+No worries! CC kitty is always here for you — no judgment, no pressure.  
 Just cozy paws, gentle purrs, and open ears instead.  
 **Ready to share something? Just type it here, mew~** 😽
 """)
@@ -14,9 +15,15 @@ user_input = st.text_area(
     height=150,
     placeholder="Type your thoughts here, mew~"
 )
+if "mode" not in st.session_state:
+    st.session_state.mode = None
+if "step" not in st.session_state:
+    st.session_state.step = 0
+if "last_answer_index" not in st.session_state:
+    st.session_state.last_answer_index = None
 book_of_answers = [
-    "🐾 On page 1, it says: 'Trust your instincts and leap forward.'  \nDo you wanna me to explain it? If you do, just reply 'explain' or 'yes', CC will do it for you!",
-    "🐾 On page 2, it says: 'Wait until the moon is full.'  \nThat means if you wait patiently for the right time—not pouncing too soon—you might just be rewarded, mew~",
+    "🐾 On page 1, it says: 'Trust your instincts and leap forward.'\nDo you want me to explain it? Just reply 'explain' or 'yes', CC will do it for you!",
+    "🐾 On page 2, it says: 'Wait until the moon is full.'\nThat means if you wait patiently for the right time—not pouncing too soon—you might just be rewarded, mew~",
     "🐾 On page 3, it says: 'Ask someone you love.'",
     "🐾 On page 4, it says: 'Maybe… but wear your lucky socks!'",
     "🐾 On page 5, it says: 'Not now, but soon enough.'",
@@ -26,9 +33,8 @@ book_of_answers = [
     "🐾 On page 9, it says: 'Sleep on it, then decide.'",
     "🐾 On page 10, it says: 'Yes, and it will be purr-fect!'"
 ]
-
 explanations = [
-    "It means: now is the best time to act bravely, even if you're scared. A leap of faith, mew~ /nThe opportunity is right ahead of you! What are you waiting for? Mew~",
+    "It means: now is the best time to act bravely, even if you're scared. A leap of faith, mew~\nThe opportunity is right ahead of you!",
     "It means: some things need time. Be patient, just like the moon grows slowly~",
     "It means: if unsure, talk to someone you trust with your heart 🫶",
     "It means: luck and coziness go together! Don't forget your socks~",
@@ -39,7 +45,6 @@ explanations = [
     "It means: let your dream guide you! A nap clears the mind mew~",
     "It means: it's all gonna work out—trust the process, kitty style!"
 ]
-
 stories = [
     "One time, I jumped from a windowsill chasing a firefly... and found a fishball! Brave leap, yummy reward, mew~",
     "I once waited four nights by the window for the full moon… and then got tuna. Patience is tasty~",
@@ -52,20 +57,13 @@ stories = [
     "I napped on a tough problem... and dreamed of the answer! Zzz~ mew~",
     "Followed a sparkle and ended up in the sunniest spot ever. Best nap spot mew~"
 ]
-
-# ---------- 状态管理 ----------
-if "mode" not in st.session_state:
-    st.session_state.mode = None
-if "step" not in st.session_state:
-    st.session_state.step = 0
-if "last_answer_index" not in st.session_state:
-    st.session_state.last_answer_index = None
-
-# ---------- 主逻辑 ----------
 if user_input:
     user_input_clean = user_input.lower().strip()
-
-    if st.session_state.mode == "book_of_answers":
+    if any(keyword in user_input_clean for keyword in ["book", "answer", "book of answers", "答案之书"]):
+        st.session_state.mode = "book_of_answers"
+        st.session_state.step = 0
+        st.markdown("🔮 cc kitty: The Book of Answers is opening... Choose a number between 1 and 10 🎲")
+    elif st.session_state.mode == "book_of_answers":
         if st.session_state.step == 0:
             try:
                 num = int(user_input_clean)
@@ -79,7 +77,6 @@ if user_input:
                     st.markdown("😿 That number doesn't work, mew. Pick between 1 and 10.")
             except:
                 st.markdown("🙀 That's not a number, mew. Try again~")
-
         elif st.session_state.step == 1:
             if user_input_clean in ["yes", "explain"]:
                 idx = st.session_state.last_answer_index
@@ -98,7 +95,6 @@ if user_input:
                 st.session_state.step = 3
             else:
                 st.markdown("🙀 Say 'yes' or 'share' if you'd like to hear my story~")
-
         elif st.session_state.step == 3:
             if user_input_clean in ["no", "not now", "nope"]:
                 st.markdown("😺 That’s okay, mew~ maybe next time! The book is always here for you 💕")
@@ -107,14 +103,7 @@ if user_input:
                 st.markdown("✨ Want to ask the Book of Answers again? Just say 'book' or 'answer' anytime mew~")
             st.session_state.mode = None
             st.session_state.step = 0
-
-    elif any(keyword in user_input_clean for keyword in ["book", "answer"]):
-        st.session_state.mode = "book_of_answers"
-        st.session_state.step = 0
-        st.markdown("🔮 cc kitty: The Book of Answers is opening... Choose a number between 1 and 10 🎲")
-
     else:
-        # ---------- 情绪分析 ----------
         def analyze_emotion(text):
             greetings = ["hi", "hello", "hey", "lol", "what's up", "how do you do"]
             sad_words = ["sad", "tired", "unhappy", "cry", "not good", "upset"]
@@ -131,11 +120,9 @@ if user_input:
             elif any(c in text for c in care_words):
                 return "Would you like to talk about it, mate?😻"
             elif any(s in text for s in suggest_words):
-                return "Aha, such a good plan! You must be an excellent P person! Have you heard of MBTI mew😹?"
+                return "Aha, such a good plan! You must be an excellent P person! Heard of MBTI, mew😹?"
             else:
                 return None
-
-        # ---------- 数学计算 ----------
         def convert_to_expression(text):
             text = text.lower()
             text = text.replace("plus", "+").replace("add", "+")
@@ -144,7 +131,6 @@ if user_input:
             text = text.replace("divided by", "/").replace("over", "/")
             cleaned = re.sub(r"[^\d\+\-\*/\.\(\)\s]", "", text)
             return cleaned.strip()
-
         def try_calculate(text):
             try:
                 expression = convert_to_expression(text)
@@ -156,8 +142,6 @@ if user_input:
                     return None
             except Exception:
                 return None
-
-        # ---------- 响应输出 ----------
         response = analyze_emotion(user_input)
         if response:
             st.markdown(f"😼: {response}")
