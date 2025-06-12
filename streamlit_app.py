@@ -5,8 +5,7 @@ st.title("Mew~ I'm cc kitty 😼 mew")
 st.markdown("""
 **Hey human~**  
 CC knows you've been carrying so much, and you're doing so amazing!  
-No worries! CC kitty is always here for you — no judgment, no pressure.  
-Just cozy paws, gentle purrs, and open ears instead.  
+No worries! CC kitty is always here for you — no judgment, no pressure. Just cozy paws, gentle purrs, and open ears instead.  
 **Ready to share something? Just type it here, mew~** 😽
 """)
 user_input = st.text_area(
