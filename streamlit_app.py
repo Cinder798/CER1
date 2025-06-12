@@ -62,7 +62,7 @@ user_input = st.text_area(label="", height=150, placeholder="Type your thoughts 
 user_input_clean = user_input.lower().strip() if user_input else ""
 book_of_answers = {
     "en": [
-        "🐾 On page 1, it says: 'Trust your instincts and leap forward.'
+        "🐾 On page 1, it says: 'Trust your instincts and leap forward.'",
 Do you want me to explain it? Just reply 'explain' or 'yes', CC will do it for you!",
         "🐾 On page 2, it says: 'Wait until the moon is full.'
 That means if you wait patiently for the right time—not pouncing too soon—you might just be rewarded, mew~",
