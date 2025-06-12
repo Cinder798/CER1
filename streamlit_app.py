@@ -1,5 +1,6 @@
 import streamlit as st
 import re
+
 st.set_page_config(page_title="cc kitty 😼 Emotional Book of Answers", layout="centered")
 st.title("Mew~ I'm cc kitty 😼 mew")
 st.markdown("""
@@ -9,18 +10,23 @@ No worries! CC kitty is always here for you — no judgment, no pressure.
 Just cozy paws, gentle purrs, and open ears instead.  
 **Ready to share something? Just type it here, mew~** 😽
 """)
+
 user_input = st.text_area(
     label="",
     height=150,
     placeholder="Type your thoughts here, mew~"
 )
+
 if "mode" not in st.session_state:
     st.session_state.mode = None
 if "step" not in st.session_state:
     st.session_state.step = 0
 if "last_answer_index" not in st.session_state:
     st.session_state.last_answer_index = None
-book_of_answers = [
+if "lang" not in st.session_state:
+    st.session_state.lang = "en"
+
+book_of_answers_en = [
     "🐾 On page 1, it says: 'Trust your instincts and leap forward.'\nDo you want me to explain it? Just reply 'explain' or 'yes', CC will do it for you!",
     "🐾 On page 2, it says: 'Wait until the moon is full.'\nThat means if you wait patiently for the right time—not pouncing too soon—you might just be rewarded, mew~",
     "🐾 On page 3, it says: 'Ask someone you love.'",
@@ -32,7 +38,8 @@ book_of_answers = [
     "🐾 On page 9, it says: 'Sleep on it, then decide.'",
     "🐾 On page 10, it says: 'Yes, and it will be purr-fect!'"
 ]
-explanations = [
+
+explanations_en = [
     "It means: now is the best time to act bravely, even if you're scared. A leap of faith, mew~\nThe opportunity is right ahead of you!",
     "It means: some things need time. Be patient, just like the moon grows slowly~",
     "It means: if unsure, talk to someone you trust with your heart 🫶",
@@ -44,7 +51,8 @@ explanations = [
     "It means: let your dream guide you! A nap clears the mind mew~",
     "It means: it's all gonna work out—trust the process, kitty style!"
 ]
-stories = [
+
+stories_en = [
     "One time, I jumped from a windowsill chasing a firefly... and found a fishball! Brave leap, yummy reward, mew~",
     "I once waited four nights by the window for the full moon… and then got tuna. Patience is tasty~",
     "I asked my cat bro where my toy went. He helped me find it under the sofa~ teamwork mew!",
@@ -56,12 +64,21 @@ stories = [
     "I napped on a tough problem... and dreamed of the answer! Zzz~ mew~",
     "Followed a sparkle and ended up in the sunniest spot ever. Best nap spot mew~"
 ]
+
 if user_input:
     user_input_clean = user_input.lower().strip()
+    is_chinese = any('\u4e00' <= char <= '\u9fff' for char in user_input_clean)
+    st.session_state.lang = "zh" if is_chinese else "en"
+
+    book_of_answers = book_of_answers_en
+    explanations = explanations_en
+    stories = stories_en
+
     if any(keyword in user_input_clean for keyword in ["book", "answer", "book of answers", "答案之书"]):
         st.session_state.mode = "book_of_answers"
         st.session_state.step = 0
         st.markdown("🔮 cc kitty: The Book of Answers is opening... Choose a number between 1 and 10 🎲")
+
     elif st.session_state.mode == "book_of_answers":
         if st.session_state.step == 0:
             try:
@@ -76,6 +93,7 @@ if user_input:
                     st.markdown("😿 That number doesn't work, mew. Pick between 1 and 10.")
             except:
                 st.markdown("🙀 That's not a number, mew. Try again~")
+
         elif st.session_state.step == 1:
             if user_input_clean in ["yes", "explain"]:
                 idx = st.session_state.last_answer_index
@@ -94,6 +112,7 @@ if user_input:
                 st.session_state.step = 3
             else:
                 st.markdown("🙀 Say 'yes' or 'share' if you'd like to hear my story~")
+
         elif st.session_state.step == 3:
             if user_input_clean in ["no", "not now", "nope"]:
                 st.markdown("😺 That’s okay, mew~ maybe next time! The book is always here for you 💕")
@@ -102,6 +121,7 @@ if user_input:
                 st.markdown("✨ Want to ask the Book of Answers again? Just say 'book' or 'answer' anytime mew~")
             st.session_state.mode = None
             st.session_state.step = 0
+
     else:
         def analyze_emotion(text):
             greetings = ["hi", "hello", "hey", "lol", "what's up", "how do you do"]
@@ -122,6 +142,7 @@ if user_input:
                 return "Aha, such a good plan! You must be an excellent P person! Heard of MBTI, mew😹?"
             else:
                 return None
+
         def convert_to_expression(text):
             text = text.lower()
             text = text.replace("plus", "+").replace("add", "+")
@@ -130,6 +151,7 @@ if user_input:
             text = text.replace("divided by", "/").replace("over", "/")
             cleaned = re.sub(r"[^\d\+\-\*/\.\(\)\s]", "", text)
             return cleaned.strip()
+
         def try_calculate(text):
             try:
                 expression = convert_to_expression(text)
@@ -141,6 +163,7 @@ if user_input:
                     return None
             except Exception:
                 return None
+
         response = analyze_emotion(user_input)
         if response:
             st.markdown(f"😼: {response}")
