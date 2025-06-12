@@ -139,7 +139,7 @@ elif st.session_state.mode == "book_of_answers":
             st.session_state.mode = None
             st.session_state.step = 0
         else:
-        def analyze_emotion(text):
+            def analyze_emotion(text):
             greetings = ["hi", "hello", "hey", "lol", "what's up", "how do you do"]
             sad_words = ["sad", "tired", "unhappy", "cry", "not good", "upset"]
             happy_words = ["happy", "great", "excited", "good", "not bad", "emmm"]
