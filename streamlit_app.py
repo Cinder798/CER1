@@ -10,9 +10,10 @@ Just cozy paws, gentle purrs, and open ears instead.
 **Ready to share something? Just type it here, mew~** 😽
 """)
 user_input = st.text_area(
-label="",
-height=150,
-placeholder="Type your thoughts here, mew~"
+    label="",
+    height=150,
+    placeholder="Type your thoughts here, mew~"
+st.write("📥 [Debug] User Input:", user_input)
 )
 def contains_chinese(text):
     return any('\u4e00' <= char <= '\u9fff' for char in text)
@@ -105,12 +106,25 @@ stories = {
 if user_input:
     lang = "zh" if contains_chinese(user_input) else "en"
     user_input_clean = user_input.lower().strip()
+    st.write("👀 [Debug] Language Detected:", lang)
+    st.write("🧹 [Debug] Cleaned Input:", user_input_clean)
+    st.write("🔄 [Debug] Mode:", st.session_state.mode)
+    st.write("🔢 [Debug] Step:", st.session_state.step)
     if st.session_state.mode != "book_of_answers":
         if any(keyword in user_input_clean for keyword in ["book", "answer", "book of answers", "答案之书"]):
             st.session_state.mode = "book_of_answers"
             st.session_state.step = 0
             prompt = "请从 1 到 10 中选择一个数字喵~ 🎲" if lang == "zh" else "Choose a number between 1 and 10, mew~ 🎲"
             st.markdown(f"🔮 {prompt}")
+        else:
+            if lang =="zh":
+                st.markdown("😺 好叭好叭，那下回吧喵～答案之书永远为你敞开哦💕")
+            else:
+                st.markdown("😺 That’s okay, mew~ maybe next time! The book is always here for you 💕")
+    else:
+        response = analyze_emotion(user_input_clean)
+        if response:
+            st.markdown(f"😼: {response}")
 elif st.session_state.mode == "book_of_answers":
     if st.session_state.step == 0:
         try:
@@ -119,10 +133,10 @@ elif st.session_state.mode == "book_of_answers":
                 st.session_state.last_answer_index = num - 1
                 st.session_state.step = 1
                 if lang == "zh":
-                    st.markdown(book_of_answers_zh[num - 1])
+                    st.markdown(book_of_answers[lang][num - 1])
                     st.markdown("🧐 需要本喵解释一下嘛？快回复 '解释' 或 '好'。")
                 else:
-                    st.markdown(book_of_answers_zh[num - 1])
+                    st.markdown(book_of_answers[lang][num - 1])
                     st.markdown("❓ Would you like an explanation mew? Say 'yes' or 'explain'~")
             elif num > 10 or num < 1:
                 st.markdown("😿 这数儿不对呀，只能是1-10的数字哈亲～" if lang == "zh" else ("😿 Number out of range! Try 1-10 mew~"))
@@ -135,7 +149,8 @@ elif st.session_state.mode == "book_of_answers":
                 st.markddown("🌸 酱紫就是CC的故事啦喵～你想分享你的故事嘛亲亲~")
                 st.markdown("💌 如果你想，把你想说的话打字在这里叭喵～")
             else:
-                st.markdown(f"🧶 Kitty Storytime: {stories[idx]}")
+                idx = st.session_state.last_answer_index 
+                st.markdown(f"🧶 Kitty Storytime: {stories[lang][idx]}")
                 st.markddown("🌸 That’s my story... mew~ now I’m curious — would you like to share your story too?")
                 st.markdown("💌 If yes, just type anything you'd like to share~")
         else:
@@ -144,7 +159,7 @@ elif st.session_state.mode == "book_of_answers":
             else:
                 st.markdown("😺 That’s okay, mew~ maybe next time! The book is always here for you 💕")
     elif st.session_state.step == 2:
-        if user_input_clean in [{text}]:
+        if user_input_clean:
             if lang == "zh":
                 st.markdown(f"😻 天哪，原来你还有这样的故事！谢谢你，人！")
             else:
