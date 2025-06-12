@@ -4,7 +4,7 @@ st.set_page_config(page_title="cc kitty 😼 Emotional Book of Answers", layout=
 st.title("Mew~ I'm cc kitty 😼 mew")
 user_input = st.text_input("Say something to me:")
 book_of_answers = [
-    "🐾 1. Trust your instincts and leap forward.",
+    "f'(🐾 1. "Trust your instincts and leap forward.")",
     "😼 2. Wait until the moon is full.",
     "😹 3. Ask someone you love.",
     "😽 4. Maybe… but wear your lucky socks!",
