@@ -146,16 +146,16 @@ elif st.session_state.mode == "book_of_answers":
             care_words = ["care about", "feel better", "cure the pain"]
             suggest_words = ["you'd better", "you should", "suggest you to"]
             text = text.lower()
-        if any(g in text for g in greetings):
-            return "Hello there! How are you feeling today. Mew~😸"
-        elif any(s in text for s in sad_words):
-            return "I'm sorry to hear you're not feeling great. How can I help you mew?🙀"
-        elif any(h in text for h in happy_words):
-            return "Ah~ I'm happy that you're feeling good today mew!😽"
-        elif any(c in text for c in care_words):
-            return "Would you like to talk about it, mate?😻"
-        elif any(s in text for s in suggest_words):
-            return "Aha, such a good plan! You must be an excellent P person! Heard of MBTI, mew😹?"
+            if any(g in text for g in greetings):
+                return "Hello there! How are you feeling today. Mew~😸"
+            elif any(s in text for s in sad_words):
+                return "I'm sorry to hear you're not feeling great. How can I help you mew?🙀"
+            elif any(h in text for h in happy_words):
+                return "Ah~ I'm happy that you're feeling good today mew!😽"
+            elif any(c in text for c in care_words):
+                return "Would you like to talk about it, mate?😻"
+            elif any(s in text for s in suggest_words):
+                return "Aha, such a good plan! You must be an excellent P person! Heard of MBTI, mew😹?"
         else:
             return None
     def convert_to_expression(text):
