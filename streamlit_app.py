@@ -55,6 +55,8 @@ if "mode" not in st.session_state:
     st.session_state.mode = None
 if "step" not in st.session_state:
     st.session_state.step = 0
+if "lang" not in st.session_state:
+    st.session_state.lang = "en"
 if "last_answer_index" not in st.session_state:
     st.session_state.last_answer_index = None
 book_of_answers = {
@@ -135,54 +137,59 @@ stories = {
         "我追着阳光跑，跑到了一处最暖的窗边，太舒服了喵~"
     ]
 }
-user_input = st.text_area(
-    label="",
-    height=150,
-    placeholder="Type your thoughts here, mew~"
-)
-st.write("📥 [Debug] User Input:", user_input)
+user_input = st.text_area(label="", height=150, placeholder="Type your thoughts here, mew~")
 user_input_clean = user_input.lower().strip() if user_input else ""
-if user_input:
-    lang = "zh" if contains_chinese(user_input) else "en"
-    st.write("🈶 [Debug] Language Detected:", lang)
+SHOW_DEBUG = False
+if SHOW_DEBUG:
+    st.write("📥 [Debug] User Input:", user_input)
+    st.write("🈶 [Debug] Language Detected:", st.session_state.lang)
     st.write("🧹 [Debug] Cleaned Input:", user_input_clean)
     st.write("🔄 [Debug] Mode:", st.session_state.mode)
     st.write("🔢 [Debug] Step:", st.session_state.step)
+if user_input:
+    st.session_state.lang = "zh" if contains_chinese(user_input) else "en"
+    lang = st.session_state.lang
     if st.session_state.mode is None:
-        response = analyze_emotion(user_input_clean) or try_calculate(user_input_clean)
-        if response:
-            st.markdown(f"😼: {response}")
-        elif any(keyword in user_input_clean for keyword in ["book", "answer", "book of answers", "答案之书"]):
+        if any(keyword in user_input_clean for keyword in ["book", "answer", "book of answers", "答案之书"]):
             st.session_state.mode = "book_of_answers"
             st.session_state.step = 0
             prompt = "请从 1 到 10 中选择一个数字喵~ 🎲" if lang == "zh" else "Choose a number between 1 and 10, mew~ 🎲"
             st.markdown(f"🔮 {prompt}")
-elif st.session_state.mode == "book_of_answers":
-    if st.session_state.step == 0:
-        try:
-            num = int(user_input_clean)
-            if 1 <= num <= 10:
-                st.session_state.last_answer_index = num - 1
-                st.session_state.step = 1
-                st.markdown(book_of_answers[lang][num - 1])
-                st.markdown("🧐 需要本喵解释一下嘛？快回复 '解释' 或 '好'。" if lang == "zh" else "❓ Would you like an explanation mew? Say 'yes' or 'explain'~")
-            else:
-                st.markdown("😿 数字要在 1-10 哦~" if lang == "zh" else "😿 Number out of range! Try 1-10 mew~")
-        except:
-            st.markdown("🙀 That's not a number, mew~")
-    elif st.session_state.step == 1:
-        if user_input_clean in ["yes", "explain", "讲故事", "我想听", "行"]:
-            idx = st.session_state.last_answer_index
-            st.markdown(f"🧶 {'CC故事时间' if lang == 'zh' else 'Kitty Storytime'}: {stories[lang][idx]}")
-            st.markdown("🌸 酱紫就是CC的故事啦喵～你想分享你的故事嘛亲亲~" if lang == "zh" else "🌸 That’s my story... mew~ now I’m curious — would you like to share your story too?")
-            st.markdown("💌 如果你想，把你想说的话打字在这里叭喵～" if lang == "zh" else "💌 If yes, just type anything you'd like to share~")
-            st.session_state.step = 2
         else:
+            response = analyze_emotion(user_input_clean) or try_calculate(user_input_clean)
+            if response:
+                st.markdown(f"😼: {response}")
+    elif st.session_state.mode == "book_of_answers":
+        if user_input_clean in ["exit", "退出", "quit", "bye"]:
+            st.markdown("👋 Okay mew~ Book closed for now~")
             st.session_state.mode = None
             st.session_state.step = 0
-    elif st.session_state.step == 2:
-        if user_input_clean:
-            st.markdown("😻 天哪，原来你还有这样的故事！谢谢你，人！" if lang == "zh" else "😻 Wow, that sounds meaningful! Thanks for sharing with cc kitty~")
-        st.markdown("✨ 想再问一次答案之书？再打 '答案之书' 就好啦~" if lang == "zh" else "✨ Want to ask the Book of Answers again? Just say 'book' or 'answer' anytime mew~")
-        st.session_state.mode = None
-        st.session_state.step = 0
+        elif st.session_state.step == 0:
+            try:
+                num = int(user_input_clean)
+                if 1 <= num <= 10:
+                    st.session_state.last_answer_index = num - 1
+                    st.session_state.step = 1
+                    st.markdown(book_of_answers[lang][num - 1])
+                    st.markdown("🧐 需要本喵解释一下嘛？快回复 '解释' 或 '好'。" if lang == "zh" else "❓ Would you like an explanation mew? Say 'yes' or 'explain'~")
+                else:
+                    st.markdown("😿 数字要在 1-10 哦~" if lang == "zh" else "😿 Number out of range! Try 1-10 mew~")
+            except:
+                st.markdown("🙀 That's not a number, mew~")
+        elif st.session_state.step == 1:
+            if user_input_clean in ["yes", "explain", "讲故事", "我想听", "行"]:
+                idx = st.session_state.last_answer_index
+                st.markdown(f"🧶 {'CC故事时间' if lang == 'zh' else 'Kitty Storytime'}: {stories[lang][idx]}")
+                st.markdown("🌸 酱紫就是CC的故事啦喵～你想分享你的故事嘛亲亲~" if lang == "zh" else "🌸 That’s my story... mew~ now I’m curious — would you like to share your story too?")
+                st.markdown("💌 如果你想，把你想说的话打字在这里叭喵～" if lang == "zh" else "💌 If yes, just type anything you'd like to share~")
+                st.session_state.step = 2
+            else:
+                st.session_state.mode = None
+                st.session_state.step = 0
+
+        elif st.session_state.step == 2:
+            if user_input_clean:
+                st.markdown("😻 天哪，原来你还有这样的故事！谢谢你，人！" if lang == "zh" else "😻 Wow, that sounds meaningful! Thanks for sharing with cc kitty~")
+            st.markdown("✨ 想再问一次答案之书？再打 '答案之书' 就好啦~" if lang == "zh" else "✨ Want to ask the Book of Answers again? Just say 'book' or 'answer' anytime mew~")
+            st.session_state.mode = None
+            st.session_state.step = 0
