@@ -147,7 +147,7 @@ elif st.session_state.mode == "book_of_answers":
             suggest_words = ["you'd better", "you should", "suggest you to"]
             text = text.lower()
         if any(g in text for g in greetings):
-            return "Hello there! How are you feeling today. Mew~😸"
+        return "Hello there! How are you feeling today. Mew~😸"
         elif any(s in text for s in sad_words):
             return "I'm sorry to hear you're not feeling great. How can I help you mew?🙀"
         elif any(h in text for h in happy_words):
