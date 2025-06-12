@@ -11,12 +11,12 @@ Just cozy paws, gentle purrs, and open ears instead.
 **Ready to share something? Just type it here, mew~** 😽
 """)
 
-user_input = st.text_area(
-    label="",
-    height=150,
-    placeholder="Type your thoughts here, mew~"
+if user_input:
+    if re.search(r'[\u4e00-\u9fff]', user_input):
+        st.session_state.lang = "zh"
+    else:
+        st.session_state.lang = "en"
 )
-
 if "mode" not in st.session_state:
     st.session_state.mode = None
 if "step" not in st.session_state:
