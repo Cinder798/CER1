@@ -1,13 +1,18 @@
 import streamlit as st
 import re
+
 SHOW_DEBUG = False
+
 def debug(*args, **kwargs):
     if SHOW_DEBUG:
         st.write(*args, **kwargs)
+
 def contains_chinese(text):
     return any('\u4e00' <= char <= '\u9fff' for char in text)
+
 def contains_english(text):
     return any('a' <= char.lower() <= 'z' for char in text)
+
 def analyze_emotion(text):
     greetings = ["hi", "hello", "hey", "lol", "what's up", "how do you do"]
     sad_words = ["sad", "tired", "unhappy", "cry", "not good", "upset"]
@@ -27,6 +32,7 @@ def analyze_emotion(text):
         return "Aha, such a good plan! You must be an excellent P person! Heard of MBTI, mew😹?"
     else:
         return None
+
 def convert_to_expression(text):
     text = text.lower()
     text = text.replace("plus", "+").replace("add", "+")
@@ -36,6 +42,7 @@ def convert_to_expression(text):
     text = text.replace("加", "+").replace("减", "-").replace("乘", "*").replace("除", "/")
     cleaned = re.sub(r"[^\d\+\-\*/\.\(\)\s]", "", text)
     return cleaned.strip()
+
 def try_calculate(text):
     try:
         expression = convert_to_expression(text)
@@ -58,11 +65,13 @@ No worries! CC kitty is always here for you — no judgment, no pressure.<br>
 Ready to share something? Just type it here, mew~</b> 🐱
 </div>
 """, unsafe_allow_html=True)
+
 user_input = st.text_area(label="", height=150, placeholder="Type your thoughts here, mew~")
 user_input_clean = user_input.lower().strip() if user_input else ""
+
 book_of_answers = {
     "en": [
-        "🐾 On page 1, it says: 'Trust your instincts and leap forward.'",
+        "🐾 On page 1, it says: 'Trust your instincts and leap forward.'
 Do you want me to explain it? Just reply 'explain' or 'yes', CC will do it for you!",
         "🐾 On page 2, it says: 'Wait until the moon is full.'
 That means if you wait patiently for the right time—not pouncing too soon—you might just be rewarded, mew~",
@@ -88,6 +97,7 @@ That means if you wait patiently for the right time—not pouncing too soon—yo
         "🐾 第10页写着：“会的喵~一切都会很完美！”"
     ]
 }
+
 explanations = {
     "en": [
         "💡 page 1 means: now is the best time to act bravely, even if you're scared. A leap of faith, mew~
@@ -115,6 +125,7 @@ The opportunity is right ahead of you!",
         "这意思是：放心吧，一切都会顺利的，喵式信仰开启！"
     ]
 }
+
 stories = {
     "en": [
         "One time, I jumped from a windowsill chasing a firefly... and found a fishball! Brave leap, yummy reward, mew~",
@@ -141,15 +152,19 @@ stories = {
         "我追着阳光跑，跑到了一处最暖的窗边，太舒服了喵~"
     ]
 }
+
 if "mode" not in st.session_state:
     st.session_state.mode = None
 if "step" not in st.session_state:
     st.session_state.step = 0
 if "last_answer_index" not in st.session_state:
     st.session_state.last_answer_index = None
+
 book_keywords = ["book", "answer", "book of answers", "答案之书"]
 lang = "zh" if contains_chinese(user_input_clean) else "en"
+
 response = analyze_emotion(user_input_clean) or try_calculate(user_input_clean)
+
 if any(keyword in user_input_clean for keyword in book_keywords):
     st.session_state.mode = "book_of_answers"
     st.session_state.step = 0
