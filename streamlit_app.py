@@ -138,7 +138,7 @@ elif st.session_state.mode == "book_of_answers":
                 st.markdown("✨ Want to ask the Book of Answers again? Just say 'book' or 'answer' anytime mew~")
             st.session_state.mode = None
             st.session_state.step = 0
-    else:
+        else:
         def analyze_emotion(text):
             greetings = ["hi", "hello", "hey", "lol", "what's up", "how do you do"]
             sad_words = ["sad", "tired", "unhappy", "cry", "not good", "upset"]
