@@ -62,8 +62,7 @@ book_of_answers = {
     "en": [
         "🐾 On page 1, it says: 'Trust your instincts and leap forward.' \nDo you want me to explain it? Just reply 'explain' or 'yes', CC will do it for you!",
         "🐾 On page 2, it says: 'Wait until the moon is full.' \nDo you want me to explain it? Just reply 'explain' or 'yes', CC will do it for you!",
-        "🐾 On page 3, it says: 'Ask someone you love.' 
-Do you want me to explain it? Just reply 'explain' or 'yes', CC will do it for you!",
+        "🐾 On page 3, it says: 'Ask someone you love.' \nDo you want me to explain it? Just reply 'explain' or 'yes', CC will do it for you!",
         "🐾 On page 4, it says: 'Maybe… but wear your lucky socks!' \nDo you want me to explain it? Just reply 'explain' or 'yes', CC will do it for you!",
         "🐾 On page 5, it says: 'Not now, but soon enough.' \nDo you want me to explain it? Just reply 'explain' or 'yes', CC will do it for you!",
         "🐾 On page 6, it says: 'Only if you meow three times!' \nDo you want me to explain it? Just reply 'explain' or 'yes', CC will do it for you!",
