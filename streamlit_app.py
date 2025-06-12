@@ -1,6 +1,5 @@
 import streamlit as st
 import re
-
 st.set_page_config(page_title="cc kitty 😼 Emotional Book of Answers", layout="centered")
 st.title("Mew~ I'm cc kitty 😼 mew")
 st.markdown("""
