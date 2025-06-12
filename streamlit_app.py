@@ -113,55 +113,48 @@ if user_input:
             st.markdown(f"🔮 {prompt}")
 elif st.session_state.mode == "book_of_answers":
     if st.session_state.step == 0:
-            try:
-                num = int(user_input_clean)
-                if 1 <= num <= 10:
+        try:
+            num = int(user_input_clean)
+            if 1 <= num <= 10:
                 st.session_state.last_answer_index = num - 1
-                msg = answers[lang][num - 1]
-                st.markdown(f"✨ {msg}")
                 st.session_state.step = 1
-                follow_up = "🧐 需要解释吗？请回复 '解释' 或 '好'。" if lang == "zh" else ("❓ Would you like an explanation mew? Say 'yes' or 'explain'~")
-        else:
-            st.markdown("😿 这数儿不对呀，只能是1-10的数字哈亲～” if lang == "zh" else ("😿 Number out of range! Try 1-10 mew~"))
+                if lang == "zh":
+                    st.markdown(book_of_answers_zh[num - 1])
+                    st.markdown("🧐 需要本喵解释一下嘛？快回复 '解释' 或 '好'。")
+                else:
+                    st.markdown(book_of_answers_zh[num - 1])
+                    st.markdown("❓ Would you like an explanation mew? Say 'yes' or 'explain'~")
+            elif num > 10 or num < 1:
+                st.markdown("😿 这数儿不对呀，只能是1-10的数字哈亲～" if lang == "zh" else ("😿 Number out of range! Try 1-10 mew~"))
+        except Exception as e:
+            st.markdown("🙀 That’s not a number, mew~")
     elif st.session_state.step == 1:
-        if user_input_clean in ["yes", "explain", "can", "fine", "go on", "continue", "行", “解释”, "好", "继续", "接着"]:
-            idx = st.session_state.last_answer_index
-            st.markdown(f"📖 {explanations[lang][idx]}")
-            st.session_state.mode = None
-            st.session_state.step = 0
-        else:
-            st.markdown("🐱 如果你想听，敲个“行”～” if lang == "zh" else （“🐱 Say 'yes' if you'd like to hear~"))
-    elif st.session_state.step == 2:
-        if user_input_clean in ["yes", "share"]:
-            if lang =="zh":
+        if user_input_clean in ["yes", "share", "share the story", "share it", "讲故事", "我想听", "行"]:
+            if lang == "zh":
                 st.markdown(f"🧶 CC故事时间: {stories[idx]}")
                 st.markddown("🌸 酱紫就是CC的故事啦喵～你想分享你的故事嘛亲亲~")
                 st.markdown("💌 如果你想，把你想说的话打字在这里叭喵～")
-            if lang == "en":
-                st.markdown(f"🧶 Kitty Storytime: {stories[idx]}")
-                st.markddown("🌸 That’s my story... mew~ now I’m curious — would you like to share your story too?")
-                st.markdown("💌 If yes, just type anything you'd like to share~")
             else:
                 st.markdown(f"🧶 Kitty Storytime: {stories[idx]}")
                 st.markddown("🌸 That’s my story... mew~ now I’m curious — would you like to share your story too?")
                 st.markdown("💌 If yes, just type anything you'd like to share~")
         else:
-            st.markdown(f"🧶 Kitty Storytime: {stories[idx]}")
-            st.markddown("🌸 That’s my story... mew~ now I’m curious — would you like to share your story too?")
-            st.markdown("💌 If yes, just type anything you'd like to share~")
-        st.session_state.step = 3
-        else:
-            st.markdown("🙀 Say 'yes' or 'share' if you'd like to hear my story~")
-        if user_input_clean in ["no", "not now", "nope"]:
             if lang =="zh":
                 st.markdown("😺 好叭好叭，那下回吧喵～答案之书永远为你敞开哦💕")
-            if lang == "en":
-                st.markdown("😺 That’s okay, mew~ maybe next time! The book is always here for you 💕")
             else:
                 st.markdown("😺 That’s okay, mew~ maybe next time! The book is always here for you 💕")
+    elif st.session_state.step == 2:
+        if user_input_clean in [{text}]:
+            if lang == "zh":
+                st.markdown(f"😻 天哪，原来你还有这样的故事！谢谢你，人！")
+            else:
+                st.markdown(f"😻 Wow, that sounds meaningful! Thanks for sharing with cc kitty~")
+                st.markdown("✨ Want to ask the Book of Answers again? Just say 'book' or 'answer' anytime mew~")
         else:
-            st.markdown(f"😻 Wow, that sounds meaningful! Thanks for sharing with cc kitty~")
-            st.markdown("✨ Want to ask the Book of Answers again? Just say 'book' or 'answer' anytime mew~")
+            if lang =="zh":
+                st.markdown("😺 好叭好叭，那下回吧喵～答案之书永远为你敞开哦💕")
+            else:
+                st.markdown("😺 That’s okay, mew~ maybe next time! The book is always here for you 💕")
         st.session_state.mode = None
         st.session_state.step = 0
     else:
