@@ -181,7 +181,6 @@ elif st.session_state.mode == "book_of_answers":
 
     elif st.session_state.step == 2:
         if user_input_clean in ["yes", "share"]:
-            idx = st.session_state.last_answer_index
             if lang =="zh":
                 st.markdown(f"🧶 CC故事时间: {stories[idx]}")
                 st.markddown("🌸 酱紫就是CC的故事啦喵～你想分享你的故事嘛亲亲~")
@@ -198,40 +197,17 @@ elif st.session_state.mode == "book_of_answers":
             st.markdown(f"🧶 Kitty Storytime: {stories[idx]}")
             st.markddown("🌸 That’s my story... mew~ now I’m curious — would you like to share your story too?")
             st.markdown("💌 If yes, just type anything you'd like to share~")
-            st.session_state.step = 3
+        st.session_state.step = 3
         else:
             st.markdown("🙀 Say 'yes' or 'share' if you'd like to hear my story~")
-    elif st.session_state.step == 3:
         if user_input_clean in ["no", "not now", "nope"]:
-            idx = st.session_state.last_answer_index
             if lang =="zh":
-                st.markdown
-                st.markddown
-                st.markdown
+                st.markdown("😺 好叭好叭，那下回吧喵～答案之书永远为你敞开哦💕")
             if lang == "en":
-                st.markdown
-                st.markddown
-                st.markdown
+                st.markdown("😺 That’s okay, mew~ maybe next time! The book is always here for you 💕")
             else:
-                st.markdown
-                st.markddown
-                st.markdown
+                st.markdown("😺 That’s okay, mew~ maybe next time! The book is always here for you 💕")
         else:
-            st.markdown("😺 That’s okay, mew~ maybe next time! The book is always here for you 💕")
-        else:
-            idx = st.session_state.last_answer_index
-            if lang =="zh":
-                st.markdown
-                st.markddown
-                st.markdown
-            if lang == "en":
-                st.markdown
-                st.markddown
-                st.markdown
-            else:
-                st.markdown
-                st.markddown
-                st.markdown
             st.markdown(f"😻 Wow, that sounds meaningful! Thanks for sharing with cc kitty~")
             st.markdown("✨ Want to ask the Book of Answers again? Just say 'book' or 'answer' anytime mew~")
         st.session_state.mode = None
