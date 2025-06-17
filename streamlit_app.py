@@ -1,5 +1,6 @@
 import streamlit as st
 import streamlit.components.v1 as components
+import re
 st.markdown(
     """
     <style>
@@ -11,7 +12,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-import re
 SHOW_DEBUG = False
 def debug(*args, **kwargs):
     if SHOW_DEBUG:
