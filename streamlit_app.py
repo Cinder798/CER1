@@ -1,5 +1,16 @@
 import streamlit as st
 import streamlit.components.v1 as components
+st.markdown(
+    """
+    <style>
+    .stApp {
+        background-color: pink;
+        color: white;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 import re
 SHOW_DEBUG = False
 def debug(*args, **kwargs):
