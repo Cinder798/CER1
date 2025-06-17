@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import re
 SHOW_DEBUG = False
 def debug(*args, **kwargs):
@@ -184,3 +185,6 @@ elif st.session_state.mode == "book_of_answers":
         st.session_state.step = 0
 elif response:
     st.markdown(f"<div style='font-size: 18px; font-weight: bold'>😼: {response}</div>", unsafe_allow_html=True)
+with open("data_cat_3d.html", "r", encoding="utf-8") as f:
+    html_code = f.read()
+components.html(html_code, height=700)
