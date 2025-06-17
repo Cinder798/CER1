@@ -39,6 +39,7 @@ function createCharTexture(char) {
   ctx.fillText(char, size/2, size/2);
   const texture = new THREE.CanvasTexture(canvas);
   texture.minFilter = THREE.LinearFilter;
+  texture.needsUpdate = true; // 确保纹理更新
   return texture;
 }
 function catShapePoints() {
@@ -76,7 +77,12 @@ function randomPointInCat() {
 }
 function createPointMesh(char){
   const texture = createCharTexture(char);
-  const material = new THREE.SpriteMaterial({map:texture,transparent:true});
+  const material = new THREE.SpriteMaterial({
+    map: texture,
+    transparent: true,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false
+  });
   const sprite = new THREE.Sprite(material);
   sprite.scale.set(3.5,3.5,1);
   sprite.userData = {
