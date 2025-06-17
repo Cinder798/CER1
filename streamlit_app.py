@@ -187,15 +187,3 @@ elif response:
     st.markdown(f"<div style='font-size: 18px; font-weight: bold'>😼: {response}</div>", unsafe_allow_html=True)
 with open("data_cat_3d.html", "r", encoding="utf-8") as f:
     html_code = f.read()
-components.html(html_code, height=700)
-st.markdown(
-    """
-    <style>
-    .stApp {
-        background-color: light pink;
-        color: white;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
