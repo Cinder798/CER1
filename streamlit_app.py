@@ -15,10 +15,10 @@ def analyze_emotion(text):
     happy_words = ["happy", "great", "excited", "good", "not bad", "emmm"]
     care_words = ["care about", "feel better", "cure the pain"]
     suggest_words = ["you'd better", "you should", "suggest"]
-    break_words_1 = [“he still love me?”]
-    break_words_2 = [“I miss him so much”]
-    break_words_3 = [“What he is thinking”]
-    break_words_4 = [“did he move on”]
+    break_words_1 = ["he still love me?"]
+    break_words_2 = ["I miss him so much"]
+    break_words_3 = ["What he is thinking”]
+    break_words_4 = ["did he move on"]
     text = text.lower()
     if any(g in text for g in greetings):
         return "Hello there! How are you feeling today. Mew~😸"
