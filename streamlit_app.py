@@ -33,7 +33,7 @@ def analyze_emotion(text):
     elif any(b in text for b in break_words_1):
         return "😽oh darling, I know you’re hurting 💔.But kitty can’t read whether someone still loves you after they’ve walked away.\n
         What I can read is this —your heart’s still beating, still soft, still made of magic.\n
-        🐾 let’s not chase their ghost, pour that love back into you, and watch yourself bloom again 🌷✨
+        🐾 let’s not chase their ghost, pour that love back into you, and watch yourself bloom again 🌷✨"
     elif any(b in text for b in break_words_1):
         return
     elif any(b in text for b in break_words_1):
