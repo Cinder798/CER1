@@ -54,7 +54,7 @@ st.markdown("""
 #### Hey human~  
 CC knows you've been carrying so much, and you're doing so amazing! No worries! CC kitty is always here for you — no judgment, no pressure.**Just cozy paws, gentle purrs, and open ears instead.**  
 Now I can:  🔋do caculation, 🔋comfort your emotions by words, 🔋play Books of Answers, 🪫Tarot card Divination (under development).
-n/🚨 Human! do not ask cc kitty things like: “does he still love me after the breakup?” 
+/n🚨 Human! do not ask cc kitty things like: “does he still love me after the breakup?” 
 **😼 if you can’t feel the love loud and clear —then baby, that’s not love. that’s static.Love yourself better, life is long**
 Ready to share something? Just type it here, mew~ 🐱
 """)
