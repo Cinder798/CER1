@@ -11,10 +11,14 @@ def contains_english(text):
     return any('a' <= char.lower() <= 'z' for char in text)
 def analyze_emotion(text):
     greetings = ["hi", "hello", "hey", "lol", "what's up", "how do you do"]
-    sad_words = ["sad", "tired", "unhappy", "cry", "not good", "upset"]
+    sad_words = ["sad", "tired", "unhappy", "cry", "not good", "upset", “pain”]
     happy_words = ["happy", "great", "excited", "good", "not bad", "emmm"]
     care_words = ["care about", "feel better", "cure the pain"]
     suggest_words = ["you'd better", "you should", "suggest"]
+    break_words_1 = [“he still love me?”]
+    break_words_2 = [“I miss him so much”]
+    break_words_3 = [“What he is thinking”]
+    break_words_4 = [“did he move on”]
     text = text.lower()
     if any(g in text for g in greetings):
         return "Hello there! How are you feeling today. Mew~😸"
@@ -26,6 +30,18 @@ def analyze_emotion(text):
         return "Would you like to talk about it, mate?😻"
     elif any(s in text for s in suggest_words):
         return "Aha, such a good plan! You must be an excellent P person! Heard of MBTI, mew😹?"
+    elif any(b in text for b in break_words_1):
+        return "😽oh darling, I know you’re hurting 💔.But kitty can’t read whether someone still loves you after they’ve walked away.\n
+        What I can read is this —your heart’s still beating, still soft, still made of magic.\n
+        🐾 let’s not chase their ghost, pour that love back into you, and watch yourself bloom again 🌷✨
+    elif any(b in text for b in break_words_1):
+        return
+    elif any(b in text for b in break_words_1):
+        return
+    elif any(b in text for b in break_words_1):
+        return
+    elif any(b in text for b in break_words_1):
+        return
     else:
         return None
 def convert_to_expression(text):
