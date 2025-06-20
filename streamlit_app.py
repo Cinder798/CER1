@@ -28,12 +28,7 @@ def analyze_emotion(text):
     elif any(s in text for s in suggest_words):
         return "Aha, such a good plan! You must be an excellent P person! Heard of MBTI, mew😹?"
     elif any(b in text for b in break_words):
-        return "😽 oh darling, I know you’re hurting 💔.\n"
-        "But kitty can’t read whether someone still loves you after they’ve walked away.\n\n"
-        "What I *can* read is this —\n"
-        "your heart’s still beating, still soft, still made of magic.\n\n"
-        "🐾 let’s not chase their ghost.\n"
-        "Pour that love back into *you*, and watch yourself bloom again 🌷✨"
+        return "😽 oh darling, I know you’re hurting 💔.But kitty can’t read whether someone still loves you after they’ve walked away.What I *can* read is this —your heart’s still beating, still soft, still made of magic.🐾 let’s not chase their ghost.Pour that love back into *you*, and watch yourself bloom again 🌷✨"
     else:
         return None
 def convert_to_expression(text):
