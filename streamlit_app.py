@@ -15,10 +15,7 @@ def analyze_emotion(text):
     happy_words = ["happy", "great", "excited", "good", "not bad", "emmm"]
     care_words = ["care about", "feel better", "cure the pain"]
     suggest_words = ["you'd better", "you should", "suggest"]
-    break_words_1 = ["he still love me?"]
-    break_words_2 = ["I miss him so much"]
-    break_words_3 = ["What he is thinking"]
-    break_words_4 = ["did he move on"]
+    break_words= ["did he move on"]
     text = text.lower()
     if any(g in text for g in greetings):
         return "Hello there! How are you feeling today. Mew~😸"
@@ -30,26 +27,13 @@ def analyze_emotion(text):
         return "Would you like to talk about it, mate?😻"
     elif any(s in text for s in suggest_words):
         return "Aha, such a good plan! You must be an excellent P person! Heard of MBTI, mew😹?"
-    elif any(b in text for b in break_words_1):
+    elif any(b in text for b in break_words):
         return "😽 oh darling, I know you’re hurting 💔.\n"
         "But kitty can’t read whether someone still loves you after they’ve walked away.\n\n"
         "What I *can* read is this —\n"
         "your heart’s still beating, still soft, still made of magic.\n\n"
         "🐾 let’s not chase their ghost.\n"
         "Pour that love back into *you*, and watch yourself bloom again 🌷✨"
-    elif any(b in text for b in break_words_1):
-        return "uh-oh... kitty radar says 🚨 heartbreak loop detected!\n
-        "😼 listen babe —if he loved you, truly, he’d still be there. Don’t make cc kitty come scratch sense into you! 🐾💅.\n"
-        "Now chin up, heart open, and go fall in love with the badass staring back at you in the mirror 💋"
-    elif any(b in text for b in break_words_1):
-        return 
-    elif any(b in text for b in break_words_2):
-        return "🚨 Human! do not ask cc kitty things like:'does he still love me after the breakup?'😼 if you can’t feel the love loud and clear —\n"
-        "then baby, that’s not love. that’s static.\n"
-    elif any(b in text for b in break_words_3):
-        return "cc kitty says:stop chasing crumbs, you deserve a whole cake 🍰"
-    elif any(b in text for b in break_words_4):
-        return "now paws up 🐾, chin high, and go love the one who matters most — you 🪞💛"
     else:
         return None
 def convert_to_expression(text):
