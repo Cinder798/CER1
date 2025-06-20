@@ -38,13 +38,18 @@ def analyze_emotion(text):
         "🐾 let’s not chase their ghost.\n"
         "Pour that love back into *you*, and watch yourself bloom again 🌷✨"
     elif any(b in text for b in break_words_1):
-        return
+        return "uh-oh... kitty radar says 🚨 heartbreak loop detected!\n
+        "😼 listen babe —if he loved you, truly, he’d still be there. Don’t make cc kitty come scratch sense into you! 🐾💅.\n"
+        "Now chin up, heart open, and go fall in love with the badass staring back at you in the mirror 💋"
     elif any(b in text for b in break_words_1):
-        return
-    elif any(b in text for b in break_words_1):
-        return
-    elif any(b in text for b in break_words_1):
-        return
+        return 
+    elif any(b in text for b in break_words_2):
+        return "🚨 Human! do not ask cc kitty things like:'does he still love me after the breakup?'😼 if you can’t feel the love loud and clear —\n"
+        "then baby, that’s not love. that’s static.\n"
+    elif any(b in text for b in break_words_3):
+        return "cc kitty says:stop chasing crumbs, you deserve a whole cake 🍰"
+    elif any(b in text for b in break_words_4):
+        return "now paws up 🐾, chin high, and go love the one who matters most — you 🪞💛"
     else:
         return None
 def convert_to_expression(text):
