@@ -17,7 +17,7 @@ def analyze_emotion(text):
     suggest_words = ["you'd better", "you should", "suggest"]
     break_words_1 = ["he still love me?"]
     break_words_2 = ["I miss him so much"]
-    break_words_3 = ["What he is thinking”]
+    break_words_3 = ["What he is thinking"]
     break_words_4 = ["did he move on"]
     text = text.lower()
     if any(g in text for g in greetings):
