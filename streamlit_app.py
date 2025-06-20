@@ -11,7 +11,7 @@ def contains_english(text):
     return any('a' <= char.lower() <= 'z' for char in text)
 def analyze_emotion(text):
     greetings = ["hi", "hello", "hey", "lol", "what's up", "how do you do"]
-    sad_words = ["sad", "tired", "unhappy", "cry", "not good", "upset", “pain”]
+    sad_words = ["sad", "tired", "unhappy", "cry", "not good", "upset", "pain"]
     happy_words = ["happy", "great", "excited", "good", "not bad", "emmm"]
     care_words = ["care about", "feel better", "cure the pain"]
     suggest_words = ["you'd better", "you should", "suggest"]
